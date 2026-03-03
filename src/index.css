@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+/* ── Samarkan Font ── */
+@font-face {
+  font-family: "Samarkan";
+  src: url("/fonts/SAMAN___.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Tailwind v4 Theme ── */
+@theme {
+  --color-bg: #0a0a0a;
+  --color-bg-raised: #141414;
+  --color-surface: #1e1e1e;
+  --color-border: #2a2a2a;
+  --color-text: #f0ece2;
+  --color-text-dim: #a09a8c;
+  --color-accent: #c9a94e;
+  --color-accent-hover: #dbbf5e;
+
+  --font-display: "Samarkan", serif;
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+
+  --animate-scroll-pulse: scrollPulse 2s ease-in-out infinite;
+
+  @keyframes scrollPulse {
+    0% {
+      top: -100%;
+    }
+    50% {
+      top: 100%;
+    }
+    100% {
+      top: 100%;
+    }
+  }
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* ── CSS Custom Properties (for non-migrated components) ── */
+:root {
+  --font-display: "Samarkan", serif;
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* ── Scrollbar (subtle) ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+/* ══════════════════════════════════════
+   NAVBAR (migrated to Tailwind — only pseudo-element utility remains)
+   ══════════════════════════════════════ */
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Hero title gradient — reliable cross-browser approach */
+.hero__title-main {
+  background: linear-gradient(90deg, #e3c162, #ffe082, #c9a94e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Give room for deep descenders so bottom of 'J' is not clipped */
+  padding-bottom: 0.15em;
+  line-height: 1;
+  overflow: visible;
+}
+
+/* ══════════════════════════════════════
+   PLACEHOLDER SECTION (for scroll testing)
+   ══════════════════════════════════════ */
+
+.section-placeholder {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-raised);
+}
+
+.section-placeholder__text {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--color-text-dim);
+  opacity: 0.3;
+}
