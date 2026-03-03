@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import TeamSection from "./components/TeamSection";
 import SponsorsSection from "./components/SponsorsSection";
 import EventsSection from "./components/EventsSection";
+import BandLineupSection from "./components/BandLineupSection";
 
 const App = () => {
   return (
@@ -16,6 +17,8 @@ const App = () => {
         <AboutSection />
 
         <EventsSection />
+
+        <BandLineupSection />
 
         <SponsorsSection />
         <TeamSection />
