@@ -5,16 +5,27 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 /* Placeholder card – swap src for a real image when ready */
-const PhotoCard = ({ className, gradient, label }) => (
+const PhotoCard = ({ className, gradient, label, imgSrc }) => (
   <div
     className={`absolute rounded-sm overflow-hidden shadow-2xl border border-white/5 ${className}`}
   >
-    {/* Gradient placeholder — replace with <img src="..." className="w-full h-full object-cover" /> */}
-    <div className={`w-full h-full ${gradient} flex items-end`}>
-      <span className="p-3 text-[0.6rem] font-['Space_Grotesk',sans-serif] tracking-[2px] uppercase text-white/40">
-        {label}
-      </span>
-    </div>
+    {imgSrc ? (
+      <>
+        <img src={imgSrc} alt={label} className="w-full h-full object-cover" />
+        {/* Dark overlay so the label remains readable */}
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/80 to-transparent flex items-end">
+          <span className="p-3 text-[0.6rem] font-['Space_Grotesk',sans-serif] tracking-[2px] uppercase text-white/80 z-10">
+            {label}
+          </span>
+        </div>
+      </>
+    ) : (
+      <div className={`w-full h-full ${gradient} flex items-end`}>
+        <span className="p-3 text-[0.6rem] font-['Space_Grotesk',sans-serif] tracking-[2px] uppercase text-white/40">
+          {label}
+        </span>
+      </div>
+    )}
   </div>
 );
 
@@ -81,26 +92,28 @@ const AboutSection = () => {
             <PhotoCard
               className="about-card w-[55%] aspect-4/3 top-0 right-6 rotate-3deg z-10"
               gradient="bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460]"
-              label="Jagriti '25 · Day 1"
+              label=""
+              imgSrc="/images/image3.png"
             />
             {/* Card 2 — center-left, larger, base */}
             <PhotoCard
               className="about-card w-[68%] aspect-4/3 top-1/2 -translate-y-1/2 left-0 -rotate-2 z-20"
               gradient="bg-gradient-to-br from-[#1c1400] via-[#2e2000] to-[#3d2900]"
-              label="Jagriti '25 · Main Stage"
+              label=""
+              imgSrc="/images/image1.jpg"
             />
             {/* Card 3 — bottom-right, small accent card */}
             <PhotoCard
               className="about-card w-[42%] aspect-4/3 bottom-0 right-0 rotate-2d z-30"
               gradient="bg-gradient-to-br from-[#1a0020] via-[#2d0040] to-[#1a0020]"
-              label="Jagriti '25 · Cultural Night"
+              label=""
+              imgSrc="/images/image2.jpeg"
             />
 
             {/* Decorative accent dot */}
             <div className="absolute bottom-6 left-[55%] w-3 h-3 rounded-full bg-accent opacity-60 z-40" />
             <div className="absolute top-6 left-[30%] w-2 h-2 rounded-full bg-accent/40 z-40" />
           </div>
-
           {/* ── Right: Text Content ── */}
           <div ref={textRef} className="flex flex-col gap-6">
             {/* Category label */}
