@@ -1,3 +1,6 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   FaInstagram,
   FaYoutube,
@@ -5,7 +8,9 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 
-const Footer = () => {
+gsap.registerPlugin(ScrollTrigger);
+
+const FooterContent = () => {
   const exploreLinks = [
     { label: "Events", href: "#events" },
     { label: "Schedule", href: "#schedule" },
@@ -134,6 +139,54 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+  );
+};
+
+const Footer = () => {
+  const footerRef = useRef(null);
+  const triggerRef = useRef(null);
+
+  useEffect(() => {
+    // Parallax reveal effect - moves from -50% to 0% (downward) as it is revealed
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        footerRef.current,
+        { yPercent: -50 },
+        {
+          yPercent: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: triggerRef.current,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: true,
+          },
+        },
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div className="relative w-full z-0">
+      {/* Fixed layer: visually stays at the bottom of the viewport */}
+      <div
+        ref={footerRef}
+        className="fixed bottom-0 left-0 w-full pointer-events-auto"
+      >
+        <FooterContent />
+      </div>
+
+      {/* Invisible clone: ensures the document is exactly the right height for scrolling */}
+      <div
+        ref={triggerRef}
+        className="invisible pointer-events-none select-none"
+        aria-hidden="true"
+      >
+        <FooterContent />
+      </div>
+    </div>
   );
 };
 

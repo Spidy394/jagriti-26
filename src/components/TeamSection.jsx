@@ -5,14 +5,39 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const members = [
-  { name: "Debojit Das", role: "President", initials: "DD" },
-  { name: "Srit Biswas", role: "General Secretary", initials: "SB" },
-  { name: "Rudrajyoty Mahata", role: "Vice President", initials: "RM" },
-  { name: "Rajarshee Hazari", role: "Treasurer", initials: "RH" },
-  { name: "Debrup Das", role: "Game Secretary", initials: "DD" },
-  { name: "Bidwattar Kar", role: "Cultural Secretary", initials: "BK" },
-  { name: "Pratik Haldar", role: "Asst. General Secretary", initials: "PH" },
-  { name: "Epsita Dutta", role: "Public Relation Lead", initials: "ED" },
+  {
+    name: "Debojit Das",
+    role: "President",
+    initials: "DD",
+    img: null,
+  },
+  { name: "Srit Biswas", role: "General Secretary", initials: "SB", img: null },
+  {
+    name: "Rudrajyoty Mahata",
+    role: "Vice President",
+    initials: "RM",
+    img: null,
+  },
+  { name: "Rajarshee Hazari", role: "Treasurer", initials: "RH", img: null },
+  { name: "Debrup Das", role: "Game Secretary", initials: "DD", img: null },
+  {
+    name: "Bidwattar Kar",
+    role: "Cultural Secretary",
+    initials: "BK",
+    img: null,
+  },
+  {
+    name: "Pratik Haldar",
+    role: "Asst. General Secretary",
+    initials: "PH",
+    img: null,
+  },
+  {
+    name: "Epsita Dutta",
+    role: "Public Relation Lead",
+    initials: "ED",
+    img: null,
+  },
 ];
 
 /* Swap src="/team/filename.jpg" into <img> once you have real photos */
@@ -25,12 +50,17 @@ const MemberCard = ({ member, index }) => (
   >
     {/* Photo area */}
     <div className="relative aspect-3/4 overflow-hidden bg-bg-raised">
-      {/* Placeholder — replace this div with <img src="..." className="w-full h-full object-cover object-top" alt={member.name} /> */}
-      <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-[#1a1400] via-[#2a2000] to-[#0d0d0d]">
-        <span className="font-['Samarkan',serif] text-5xl text-accent/25 select-none tracking-widest">
-          {member.initials}
-        </span>
-      </div>
+      {/* Gradient background (visible for placeholder cards) */}
+      <div className="absolute inset-0 bg-linear-to-br from-[#1a1400] via-[#2a2000] to-[#0d0d0d]" />
+
+      {/* Photo layered on top when available */}
+      {member.img && (
+        <img
+          src={member.img}
+          alt={member.name}
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+      )}
 
       {/* Gold shimmer overlay on hover */}
       <div className="absolute inset-0 bg-linear-to-t from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

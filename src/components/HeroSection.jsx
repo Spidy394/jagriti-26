@@ -153,7 +153,7 @@ const HeroSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="hero relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
+      className="hero sticky top-0 z-0 w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
       id="hero"
     >
       {/* Background video */}

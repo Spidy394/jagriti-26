@@ -5,22 +5,22 @@ import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import TeamSection from "./components/TeamSection";
 import SponsorsSection from "./components/SponsorsSection";
+import EventsSection from "./components/EventsSection";
 
 const App = () => {
   return (
     <>
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
+      <main className="relative z-10 bg-bg flex flex-col">
+        <Navbar />
+        <HeroSection />
+        <AboutSection />
 
-      {/* Placeholder section so scroll effects can be tested */}
-      <section className="section-placeholder" id="events">
-        <p className="section-placeholder__text">Events coming soon</p>
-      </section>
+        <EventsSection />
 
-      <SponsorsSection />
-      <TeamSection />
-      <ContactSection />
+        <SponsorsSection />
+        <TeamSection />
+        <ContactSection />
+      </main>
       <Footer />
     </>
   );

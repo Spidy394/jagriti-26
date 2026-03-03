@@ -79,7 +79,7 @@ const AboutSection = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="relative bg-bg overflow-hidden py-24 md:py-32"
+      className="relative z-10 bg-bg overflow-hidden py-24 md:py-32"
     >
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
