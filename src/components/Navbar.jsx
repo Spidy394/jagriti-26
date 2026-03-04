@@ -42,7 +42,7 @@ const Navbar = () => {
         ref={navRef}
         id="navbar"
         style={{ opacity: 0 }}
-        className={`fixed top-0 left-0 w-full z-100 flex items-center justify-between transition-all duration-400 ease-in-out ${
+        className={`fixed top-0 left-0 w-full z-100 flex items-center justify-between transition-colors duration-400 ease-in-out ${
           scrolled ? "bg-bg/60 backdrop-blur-lg py-3 px-10" : "py-5 px-10"
         }`}
       >
@@ -51,13 +51,13 @@ const Navbar = () => {
           <img
             src="/logo.png"
             alt="Jagriti"
-            className={`w-auto object-contain transition-all duration-400 ${
+            className={`w-auto object-contain transition-[height] duration-400 ${
               scrolled ? "h-11" : "h-16"
             }`}
           />
           <a
             href="#"
-            className="font-['Samarkan',serif] text-[1.6rem] text-accent tracking-[2px] select-none"
+            className="font-['Samarkan',serif] text-[1.6rem] text-accent tracking-[2px] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
           >
             Jagriti
           </a>
@@ -69,7 +69,7 @@ const Navbar = () => {
             <li key={link}>
               <a
                 href={`#${link.toLowerCase()}`}
-                className="nav-link font-['Space_Grotesk',sans-serif] text-[0.85rem] font-medium tracking-[1.5px] uppercase text-text-dim relative transition-colors duration-300 hover:text-text"
+                className="nav-link font-['Space_Grotesk',sans-serif] text-[0.85rem] font-medium tracking-[1.5px] uppercase text-text-dim relative transition-colors duration-300 hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:text-text rounded-sm px-1 py-0.5"
               >
                 {link}
               </a>
@@ -80,7 +80,7 @@ const Navbar = () => {
         {/* Desktop CTA */}
         <button
           id="nav-register-btn"
-          className="hidden md:block font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[1.5px] uppercase text-bg bg-accent border-none py-[0.6rem] px-6 cursor-pointer transition-all duration-300 hover:bg-accent-hover hover:-translate-y-px"
+          className="hidden md:block font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[1.5px] uppercase text-bg bg-accent border-none py-[0.6rem] px-6 cursor-pointer transition duration-300 hover:bg-accent-hover hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
         >
           Register
         </button>
@@ -93,7 +93,7 @@ const Navbar = () => {
           id="nav-hamburger"
         >
           <span
-            className={`block w-6 h-0.5 bg-text transition-all duration-300 ${
+            className={`block w-6 h-0.5 bg-text transition-transform duration-300 ${
               menuOpen ? "rotate-45 translate-x-1.25 translate-y-1.25" : ""
             }`}
           />
@@ -103,7 +103,7 @@ const Navbar = () => {
             }`}
           />
           <span
-            className={`block w-6 h-0.5 bg-text transition-all duration-300 ${
+            className={`block w-6 h-0.5 bg-text transition-transform duration-300 ${
               menuOpen ? "-rotate-45 translate-x-1.25 -translate-y-1.25" : ""
             }`}
           />
@@ -120,14 +120,14 @@ const Navbar = () => {
           <a
             key={link}
             href={`#${link.toLowerCase()}`}
-            className="font-['Space_Grotesk',sans-serif] text-[1.2rem] font-medium tracking-[3px] uppercase text-text-dim transition-colors duration-300 hover:text-accent"
+            className="font-['Space_Grotesk',sans-serif] text-[1.2rem] font-medium tracking-[3px] uppercase text-text-dim transition-colors duration-300 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm px-2 py-1"
             onClick={handleLinkClick}
           >
             {link}
           </a>
         ))}
         <button
-          className="font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[1.5px] uppercase text-bg bg-accent border-none py-[0.6rem] px-6 cursor-pointer transition-all duration-300 hover:bg-accent-hover hover:-translate-y-px"
+          className="font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[1.5px] uppercase text-bg bg-accent border-none py-[0.6rem] px-6 cursor-pointer transition duration-300 hover:bg-accent-hover hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
           onClick={handleLinkClick}
         >
           Register

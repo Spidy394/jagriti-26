@@ -89,7 +89,7 @@ const SponsorsSection = () => {
           <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[5px] uppercase text-accent">
             Our Supporters
           </p>
-          <h2 className="font-['Samarkan',serif] text-5xl md:text-6xl text-text tracking-[2px] leading-none">
+          <h2 className="font-['Samarkan',serif] text-5xl md:text-6xl text-text tracking-[2px] leading-none text-balance">
             Sponsors
           </h2>
           <div className="w-16 h-px bg-accent/50 mt-1" />
@@ -110,7 +110,8 @@ const SponsorsSection = () => {
                 {tier.sponsors.map((sponsor, idx) => (
                   <div
                     key={idx}
-                    className="group relative flex items-center justify-center w-32 h-20 md:w-40 md:h-24 bg-bg-raised border border-border rounded-sm transition-all duration-300 hover:border-accent/40 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(201,169,78,0.1)]"
+                    className="group relative flex items-center justify-center w-32 h-20 md:w-40 md:h-24 bg-bg-raised border border-border rounded-sm transition duration-300 hover:border-accent/40 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(201,169,78,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    tabIndex={0}
                   >
                     {/* Placeholder for Logo Image */}
                     <span className="font-['Samarkan',serif] text-3xl text-text-dim/40 group-hover:text-accent/60 transition-colors">

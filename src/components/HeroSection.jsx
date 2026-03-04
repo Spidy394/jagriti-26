@@ -191,9 +191,9 @@ const HeroSection = () => {
         <div className="hero__line w-[80%] md:w-[60%] max-w-[500px] h-px bg-accent opacity-0 origin-center mb-1"></div>
 
         {/* Title block */}
-        <div className="hero__title-block flex items-baseline justify-center gap-0 leading-none select-none">
+        <div className="hero__title-block flex items-baseline justify-center gap-0 leading-none select-none text-balance">
           {/* Main title colourized like the logo with a gold gradient */}
-          <h1 className="hero__title-main font-['Samarkan',serif] text-[clamp(3.5rem,16vw,6rem)] md:text-[clamp(5rem,18vw,14rem)] tracking-[4px] m-0">
+          <h1 className="hero__title-main font-['Samarkan',serif] text-[clamp(3.5rem,16vw,6rem)] md:text-[clamp(5rem,18vw,14rem)] tracking-[4px] m-0 text-balance">
             Jagriti
           </h1>
           <span className="hero__title-year font-['Samarkan',serif] text-[clamp(1.8rem,7vw,3rem)] md:text-[clamp(2.5rem,8vw,6rem)] text-accent tracking-[2px] leading-[0.85] relative top-[0.15em]">
@@ -207,13 +207,13 @@ const HeroSection = () => {
 
         <div className="hero__cta-group flex flex-col md:flex-row gap-4 mt-4 opacity-0 items-center w-full md:w-auto">
           <button
-            className="hero__btn hero__btn--primary font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase py-[0.85rem] px-[2.2rem] w-full max-w-[280px] md:w-auto text-center cursor-pointer transition-all duration-300 bg-accent text-bg border-none hover:bg-accent-hover hover:-translate-y-[2px]"
+            className="hero__btn hero__btn--primary font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase py-[0.85rem] px-[2.2rem] w-full max-w-[280px] md:w-auto text-center cursor-pointer transition-transform duration-300 bg-accent text-bg border-none hover:bg-accent-hover hover:-translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
             id="hero-explore-btn"
           >
             Explore Events
           </button>
           <button
-            className="hero__btn hero__btn--outline font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase py-[0.85rem] px-[2.2rem] w-full max-w-[280px] md:w-auto text-center cursor-pointer transition-all duration-300 bg-transparent text-text border border-border hover:border-accent hover:text-accent hover:-translate-y-[2px]"
+            className="hero__btn hero__btn--outline font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase py-[0.85rem] px-[2.2rem] w-full max-w-[280px] md:w-auto text-center cursor-pointer transition-transform duration-300 bg-transparent text-text border border-border hover:border-accent hover:text-accent hover:-translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
             id="hero-register-btn"
           >
             Register Now

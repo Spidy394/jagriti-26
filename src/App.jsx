@@ -12,7 +12,7 @@ import ScheduleSection from "./components/ScheduleSection";
 const App = () => {
   return (
     <>
-      <main className="relative z-10 bg-bg flex flex-col">
+      <main className="relative z-10 bg-bg">
         <Navbar />
         <HeroSection />
         <AboutSection />

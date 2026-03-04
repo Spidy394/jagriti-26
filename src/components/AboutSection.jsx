@@ -123,7 +123,7 @@ const AboutSection = () => {
 
             {/* Heading */}
             <div className="about-text-item">
-              <h2 className="font-['Samarkan',serif] text-5xl md:text-6xl text-text leading-[0.95] tracking-[2px]">
+              <h2 className="font-['Samarkan',serif] text-5xl md:text-6xl text-text leading-[0.95] tracking-[2px] text-balance">
                 Jagriti
               </h2>
             </div>
@@ -150,7 +150,7 @@ const AboutSection = () => {
             <div className="about-text-item mt-2">
               <a
                 href="#"
-                className="inline-block font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase bg-accent text-bg py-3 px-8 transition-all duration-300 hover:bg-accent-hover hover:-translate-y-[2px] hover:shadow-[0_6px_20px_rgba(201,169,78,0.35)]"
+                className="inline-block font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase bg-accent text-bg py-3 px-8 transition duration-300 hover:bg-accent-hover hover:-translate-y-[2px] hover:shadow-[0_6px_20px_rgba(201,169,78,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
               >
                 View Brochure
               </a>

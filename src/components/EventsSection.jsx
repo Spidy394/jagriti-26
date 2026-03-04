@@ -83,7 +83,8 @@ const EventCard = ({ event, isActive, onHover, onLeave, isAnyActive }) => {
     <div
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
-      className="relative h-full overflow-hidden cursor-pointer shrink-0 transition-all duration-700 ease-[cubic-bezier(0.77,0,0.18,1)]"
+      className="relative h-full overflow-hidden cursor-pointer shrink-0 transition-[width,min-width] duration-700 ease-[cubic-bezier(0.77,0,0.18,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+      tabIndex={0}
       style={{
         width: isActive
           ? EXPANDED_WIDTH
@@ -161,7 +162,7 @@ const EventCard = ({ event, isActive, onHover, onLeave, isAnyActive }) => {
 
       {/* ── Expanded content ── */}
       <div
-        className="absolute inset-0 flex flex-col justify-end p-10 transition-all duration-500"
+        className="absolute inset-0 flex flex-col justify-end p-10 transition-[opacity,transform] duration-500"
         style={{
           opacity: isActive ? 1 : 0,
           transform: isActive ? "translateY(0)" : "translateY(16px)",
@@ -178,7 +179,7 @@ const EventCard = ({ event, isActive, onHover, onLeave, isAnyActive }) => {
         </p>
 
         {/* Event name */}
-        <h2 className="font-['Samarkan',serif] text-5xl text-text leading-[0.9] tracking-[3px] mb-1">
+        <h2 className="font-['Samarkan',serif] text-5xl text-text leading-[0.9] tracking-[3px] mb-1 text-balance">
           {event.name}
         </h2>
         <p className="font-['Space_Grotesk',sans-serif] text-[0.78rem] text-text-dim tracking-[2px] uppercase mb-5 italic">
@@ -241,7 +242,7 @@ const EventCard = ({ event, isActive, onHover, onLeave, isAnyActive }) => {
           </p>
           <a
             href="#register"
-            className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[2px] uppercase px-5 py-2 border transition-all duration-300 hover:-translate-y-px"
+            className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[2px] uppercase px-5 py-2 border transition duration-300 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
             style={{
               borderColor: event.accentColor,
               color: event.accentColor,
@@ -282,7 +283,7 @@ const EventsSection = () => {
         <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[5px] uppercase text-accent mb-4">
           Jagriti '26
         </p>
-        <h2 className="font-['Samarkan',serif] text-5xl md:text-6xl text-text leading-[0.95] tracking-[2px]">
+        <h2 className="font-['Samarkan',serif] text-5xl md:text-6xl text-text leading-[0.95] tracking-[2px] text-balance">
           Events
         </h2>
         <div className="w-16 h-px bg-accent opacity-50 mt-5" />

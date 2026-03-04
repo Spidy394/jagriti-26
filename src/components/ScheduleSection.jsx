@@ -113,8 +113,6 @@ const scheduleData = {
   },
 };
 
-
-
 // Timeline hours to display on the header (09:00 AM to 11:00 PM)
 const hours = [
   "9 AM",
@@ -141,7 +139,7 @@ const ScheduleSection = () => {
   return (
     <section
       id="schedule"
-      className="relative z-10 bg-bg w-full overflow-hidden py-32 border-t border-white/5 font-['Space_Grotesk',sans-serif]"
+      className="relative bg-bg w-full overflow-hidden py-32 border-t border-white/5 font-['Space_Grotesk',sans-serif]"
     >
       {/* ── Background Detail ── */}
       <div
@@ -158,7 +156,7 @@ const ScheduleSection = () => {
         <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-bold tracking-[6px] uppercase text-accent mb-4">
           FESTIVAL SCHEDULE
         </p>
-        <h2 className="font-['Samarkan',serif] text-5xl md:text-7xl text-text leading-none tracking-[2px] mb-6">
+        <h2 className="font-['Samarkan',serif] text-5xl md:text-7xl text-text leading-none tracking-[2px] mb-6 text-balance">
           Event Timeline
         </h2>
         <p className="font-['Space_Grotesk',sans-serif] text-sm md:text-base text-text-dim max-w-2xl leading-relaxed">
@@ -178,11 +176,11 @@ const ScheduleSection = () => {
                 <button
                   key={key}
                   onClick={() => setActiveDay(key)}
-                  className="relative group transition-all duration-300 w-36 h-24 flex flex-col items-center justify-center"
+                  className="relative group transition duration-300 w-36 h-24 flex flex-col items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
                 >
                   {/* Hexagon shape using clip-path */}
                   <div
-                    className={`absolute inset-0 transition-all duration-300 ${
+                    className={`absolute inset-0 transition duration-300 ${
                       isActive
                         ? "bg-accent scale-105 shadow-[0_0_30px_rgba(201,169,78,0.2)]"
                         : "bg-transparent border border-white/20 group-hover:border-accent/50"
@@ -215,7 +213,6 @@ const ScheduleSection = () => {
               );
             })}
           </div>
-
         </div>
       </div>
 
@@ -272,7 +269,8 @@ const ScheduleSection = () => {
               {currentData.events.map((event) => (
                 <div
                   key={event.id}
-                  className="group relative h-12 rounded-[3px] border transition-all duration-300 hover:-translate-y-1 overflow-hidden cursor-pointer"
+                  className="group relative h-12 rounded-[3px] border transition duration-300 hover:-translate-y-1 overflow-hidden cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  tabIndex={0}
                   style={{
                     ...timeToGrid(event.time, event.ampm, event.duration),
                     backgroundColor: `${event.color}15`,

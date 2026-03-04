@@ -9,14 +9,14 @@ const members = [
     name: "Debojit Das",
     role: "President",
     initials: "DD",
-    img: null,
+    img: "/images/team/Debojit_Das.png",
   },
-  { name: "Srit Biswas", role: "General Secretary", initials: "SB", img: null },
+  { name: "Srit Biswas", role: "General Secretary", initials: "SB", img: "/images/team/Srit_Biswas.png" },
   {
     name: "Rudrajyoty Mahata",
     role: "Vice President",
     initials: "RM",
-    img: null,
+    img: "/images/team/Rudrajyoty_Mahata.png",
   },
   { name: "Rajarshee Hazari", role: "Treasurer", initials: "RH", img: null },
   { name: "Debrup Das", role: "Game Secretary", initials: "DD", img: null },
@@ -43,10 +43,9 @@ const members = [
 /* Swap src="/team/filename.jpg" into <img> once you have real photos */
 const MemberCard = ({ member, index }) => (
   <div
-    className="team-card group relative flex flex-col overflow-hidden border border-border bg-bg
-      transition-all duration-500 hover:border-accent/40 hover:-translate-y-2
-      hover:shadow-[0_16px_40px_rgba(201,169,78,0.12)]"
+    className="team-card group relative flex flex-col overflow-hidden border border-border bg-bg transition-[border-color,transform,box-shadow] duration-500 hover:border-accent/40 hover:-translate-y-2 hover:shadow-[0_16px_40px_rgba(201,169,78,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
     style={{ opacity: 0 }}
+    tabIndex={0}
   >
     {/* Photo area */}
     <div className="relative aspect-3/4 overflow-hidden bg-bg-raised">
@@ -82,7 +81,7 @@ const MemberCard = ({ member, index }) => (
     </div>
 
     {/* Bottom accent line — slides in on hover */}
-    <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-500" />
+    <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-[width] duration-500" />
   </div>
 );
 
@@ -132,7 +131,7 @@ const TeamSection = () => {
           <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[5px] uppercase text-accent">
             The People Behind Jagriti
           </p>
-          <h2 className="font-['Samarkan',serif] text-5xl md:text-6xl text-text tracking-[2px] leading-none">
+          <h2 className="font-['Samarkan',serif] text-5xl md:text-6xl text-text tracking-[2px] leading-none text-balance">
             Meet the Team
           </h2>
           <div className="w-16 h-px bg-accent/50 mt-1" />

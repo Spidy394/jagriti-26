@@ -129,7 +129,7 @@ const FooterContent = () => {
                   aria-label={s.label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text-dim transition-all duration-300 hover:text-accent hover:-translate-y-[2px]"
+                  className="text-text-dim transition-[color,transform] duration-300 hover:text-accent hover:-translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
                 >
                   {s.icon}
                 </a>

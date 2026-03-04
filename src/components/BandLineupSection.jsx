@@ -178,7 +178,7 @@ const BandCard = ({ band, index }) => (
       </h3>
 
       <div
-        className="h-px mb-4 transition-all duration-500"
+        className="h-px mb-4 transition-[width] duration-500"
         style={{ width: "2.5rem", background: band.accentColor, opacity: 0.5 }}
       />
 
@@ -237,15 +237,17 @@ const BandLineupSection = () => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Set up the timeline that pins the container
+      // Set up the timeline that pins the section
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: "center center",
-          // The scroll distance determines how long the pin lasts
-          end: () => `+=${window.innerHeight * 1.5}`,
-          scrub: 0.5,
+          trigger: sectionRef.current,
+          start: "top top",
+          // The scroll distance determines how long the pin lasts.
+          // Increased to 2.5 to give more time for cards to animate before unpinning.
+          end: () => `+=${window.innerHeight * 2.5}`,
+          scrub: 1,
           pin: true,
+          pinSpacing: true, // Ensure spacing is added so the next section waits
           // Markers are useful for debugging but should be disabled in production
           // markers: true,
         },
@@ -259,14 +261,10 @@ const BandLineupSection = () => {
         gsap.set(card, { y: window.innerHeight });
 
         // Card slides up to its final offset position (stacking effect)
-        tl.to(
-          card,
-          {
-            y: index * 35, // The top offset for the 3D stack
-            ease: "none",
-          },
-          index - 1, // Sequence them: 0s, 1s linearly
-        );
+        tl.to(card, {
+          y: index * 35, // The top offset for the 3D stack
+          ease: "none",
+        });
       });
     }, sectionRef);
 
@@ -274,17 +272,13 @@ const BandLineupSection = () => {
   }, []);
 
   return (
-    <section
-      id="lineup"
-      ref={sectionRef}
-      className="relative z-10 bg-bg w-full"
-    >
+    <section id="lineup" ref={sectionRef} className="relative bg-bg w-full">
       {/* Header */}
       <div className="max-w-7xl mx-auto px-8 md:px-16 pt-24 pb-12 flex flex-col items-center text-center">
         <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[5px] uppercase text-accent mb-4">
           Live Performances
         </p>
-        <h2 className="font-['Samarkan',serif] text-5xl md:text-6xl text-text leading-[0.95] tracking-[2px]">
+        <h2 className="font-['Samarkan',serif] text-5xl md:text-6xl text-text leading-[0.95] tracking-[2px] text-balance">
           Band Line-up
         </h2>
         <div className="w-16 h-px bg-accent opacity-50 mt-5" />
@@ -294,7 +288,7 @@ const BandLineupSection = () => {
       {/* overflow-hidden so the cards coming from below don't leak out of the section bounds */}
       <div
         ref={containerRef}
-        className="relative w-full h-[60vh] flex justify-center items-start overflow-hidden mt-10"
+        className="relative w-full min-h-[420px] pb-12 flex justify-center items-start overflow-hidden mt-10"
       >
         <div className="relative w-full max-w-5xl px-4 md:px-8 flex justify-center">
           {bands.map((band, i) => (
