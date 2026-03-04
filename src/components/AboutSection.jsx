@@ -159,7 +159,9 @@ const AboutSection = () => {
             {/* CTA */}
             <div className="about-text-item mt-2">
               <a
-                href="#"
+                href="https://drive.google.com/file/d/1bxS8ufX3yoj_QoshRUfyxGAL7URjxvof/view?usp=drive_link"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase bg-accent text-bg py-3 px-8 transition duration-300 hover:bg-accent-hover hover:-translate-y-[2px] hover:shadow-[0_6px_20px_rgba(201,169,78,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
               >
                 View Brochure

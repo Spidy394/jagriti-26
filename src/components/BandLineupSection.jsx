@@ -34,7 +34,7 @@ const bands = [
   {
     id: "trap",
     name: "TRAP",
-    genre: "Hip-Hop · Trap",
+    genre: "Hip-Hop · Metal",
     date: "8th March",
     time: "8 PM",
     accentColor: "#a855f7",
