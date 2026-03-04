@@ -118,7 +118,7 @@ const ScheduleSection = () => {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-accent/5 blur-[120px] rounded-full pointer-events-none -z-10" />
 
       {/* ── Header Area ── */}
-      <div className="max-w-7xl mx-auto px-8 md:px-16 flex flex-col items-center text-center mb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 flex flex-col items-center text-center mb-20">
         <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-bold tracking-[6px] uppercase text-accent mb-4">
           FESTIVAL SCHEDULE
         </p>
@@ -132,7 +132,7 @@ const ScheduleSection = () => {
       </div>
 
       {/* ── Top Controls (Days + Legends) ── */}
-      <div className="max-w-7xl mx-auto px-4 md:px-16 mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 mb-16">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
           {/* Day Hexagon Toggles */}
           <div className="flex gap-4">
@@ -142,7 +142,7 @@ const ScheduleSection = () => {
                 <button
                   key={key}
                   onClick={() => setActiveDay(key)}
-                  className="relative group transition duration-300 w-36 h-24 flex flex-col items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+                  className="relative group transition duration-300 w-28 h-20 sm:w-36 sm:h-24 flex flex-col items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
                 >
                   {/* Hexagon shape using clip-path */}
                   <div
@@ -183,7 +183,7 @@ const ScheduleSection = () => {
       </div>
 
       {/* ── Vertical Timeline ── */}
-      <div className="max-w-4xl mx-auto px-4 md:px-16 relative">
+      <div className="max-w-4xl mx-auto px-4 sm:px-8 md:px-16 relative">
         {/* Central Vertical Line */}
         <div className="absolute left-[39px] md:left-[119px] top-6 bottom-6 w-px bg-accent/20" />
 

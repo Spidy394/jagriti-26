@@ -36,6 +36,18 @@ const Navbar = () => {
   const handleMenuToggle = () => setMenuOpen((prev) => !prev);
   const handleLinkClick = () => setMenuOpen(false);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   return (
     <>
       <nav
@@ -43,7 +55,9 @@ const Navbar = () => {
         id="navbar"
         style={{ opacity: 0 }}
         className={`fixed top-0 left-0 w-full z-100 flex items-center justify-between transition-colors duration-400 ease-in-out ${
-          scrolled ? "bg-bg/60 backdrop-blur-lg py-3 px-10" : "py-5 px-10"
+          scrolled
+            ? "bg-bg/60 backdrop-blur-lg py-3 px-4 sm:px-6 md:px-10"
+            : "py-5 px-4 sm:px-6 md:px-10"
         }`}
       >
         {/* Left: logo + brand */}
@@ -90,9 +104,10 @@ const Navbar = () => {
 
         {/* Mobile hamburger */}
         <button
-          className="flex md:hidden flex-col gap-1.25 cursor-pointer bg-transparent border-none p-1 z-110"
+          className="flex md:hidden flex-col gap-1.25 cursor-pointer bg-transparent border-none p-2.5 z-110 min-w-[44px] min-h-[44px] items-center justify-center"
           onClick={handleMenuToggle}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
           id="nav-hamburger"
         >
           <span
@@ -115,7 +130,7 @@ const Navbar = () => {
 
       {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 bg-bg/96 z-105 flex-col items-center justify-center gap-10 ${
+        className={`fixed inset-0 bg-bg/96 z-105 flex-col items-center justify-center gap-8 ${
           menuOpen ? "flex" : "hidden"
         }`}
       >
@@ -123,7 +138,7 @@ const Navbar = () => {
           <a
             key={link}
             href={`#${link.toLowerCase()}`}
-            className="font-['Space_Grotesk',sans-serif] text-[1.2rem] font-medium tracking-[3px] uppercase text-text-dim transition-colors duration-300 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm px-2 py-1"
+            className="font-['Space_Grotesk',sans-serif] text-[1.2rem] font-medium tracking-[3px] uppercase text-text-dim transition-colors duration-300 hover:text-accent active:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm px-4 py-3 min-h-[52px] flex items-center"
             onClick={handleLinkClick}
           >
             {link}
@@ -133,7 +148,7 @@ const Navbar = () => {
           href="https://forms.gle/bzqzBgswUN2khZ8L9"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[1.5px] uppercase text-bg bg-accent border-none py-[0.6rem] px-6 cursor-pointer transition duration-300 hover:bg-accent-hover hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm no-underline"
+          className="font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[1.5px] uppercase text-bg bg-accent border-none py-[0.8rem] px-8 cursor-pointer transition duration-300 hover:bg-accent-hover active:bg-accent-hover hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm no-underline min-h-[52px] flex items-center"
           onClick={handleLinkClick}
         >
           Register

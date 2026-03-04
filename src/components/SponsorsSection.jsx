@@ -99,7 +99,7 @@ const SponsorsSection = () => {
       {/* Decorative top border */}
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-accent/30 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-8 md:px-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16">
         {/* Header */}
         <div className="sponsor-header flex flex-col items-center text-center gap-4 mb-16 md:mb-20">
           <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[5px] uppercase text-accent">

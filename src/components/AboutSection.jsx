@@ -94,10 +94,10 @@ const AboutSection = () => {
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-8 md:px-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* ── Left: Floating Photo Cards ── */}
-          <div ref={cardsRef} className="relative h-[420px] md:h-[500px]">
+          <div ref={cardsRef} className="relative h-[300px] sm:h-[420px] md:h-[500px]">
             {/* Card 1 — top, slightly rotated */}
             <PhotoCard
               className="about-card w-[55%] aspect-4/3 top-0 right-6 rotate-3deg z-10"

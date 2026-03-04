@@ -101,12 +101,10 @@ const BandCard = ({ band, index }) => (
     className="relative flex flex-col md:flex-row overflow-hidden group w-full"
     style={{
       maxWidth: "680px",
-      height: "320px",
       border: "1px solid #2a2a2a",
       borderRadius: "8px",
       background: "#0a0a0a",
       transition: "border-color 0.4s ease",
-      boxShadow: "0 -10px 40px -10px rgba(0,0,0,0.5)", // Strong top shadow for stacking depth
     }}
     onMouseEnter={(e) =>
       (e.currentTarget.style.borderColor = band.accentColor + "66")
@@ -114,7 +112,7 @@ const BandCard = ({ band, index }) => (
     onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#2a2a2a")}
   >
     {/* ── Left: image panel ── */}
-    <div className="relative shrink-0 overflow-hidden w-full md:w-[360px] h-[160px] md:h-full">
+    <div className="relative shrink-0 overflow-hidden w-full md:w-[360px] h-[200px] md:h-[320px]">
       {band.img ? (
         <img
           src={band.img}
@@ -236,6 +234,9 @@ const BandLineupSection = () => {
   const cardsRef = useRef([]);
 
   useEffect(() => {
+    // Only run GSAP stacking animation on desktop (md+)
+    if (window.innerWidth < 768) return;
+
     let ctx = gsap.context(() => {
       // Set up the timeline that pins the section
       const tl = gsap.timeline({
@@ -274,7 +275,7 @@ const BandLineupSection = () => {
   return (
     <section id="lineup" ref={sectionRef} className="relative bg-bg w-full">
       {/* Header */}
-      <div className="max-w-7xl mx-auto px-8 md:px-16 pt-24 pb-12 flex flex-col items-center text-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 pt-24 pb-12 flex flex-col items-center text-center">
         <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[5px] uppercase text-accent mb-4">
           Live Performances
         </p>
@@ -284,11 +285,18 @@ const BandLineupSection = () => {
         <div className="w-16 h-px bg-accent opacity-50 mt-5" />
       </div>
 
-      {/* GSAP Pinned Container area */}
+      {/* ── Mobile: simple vertical stack (md:hidden) ── */}
+      <div className="md:hidden px-4 pb-16 flex flex-col gap-6 items-center">
+        {bands.map((band, i) => (
+          <BandCard key={band.id} band={band} index={i} />
+        ))}
+      </div>
+
+      {/* ── Desktop: GSAP Pinned stacking container (hidden on mobile) ── */}
       {/* overflow-hidden so the cards coming from below don't leak out of the section bounds */}
       <div
         ref={containerRef}
-        className="relative w-full min-h-[420px] pb-12 flex justify-center items-start overflow-hidden mt-10"
+        className="hidden md:flex relative w-full min-h-[420px] pb-12 justify-center items-start overflow-hidden mt-10"
       >
         <div className="relative w-full max-w-5xl px-4 md:px-8 flex justify-center">
           {bands.map((band, i) => (

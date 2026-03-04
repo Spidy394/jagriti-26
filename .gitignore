@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 .agents
-skills-lock.*
+skills-lock.json

@@ -177,7 +177,7 @@ const HeroSection = () => {
       {/* Content — dramatic Sanskriti-style layout */}
       <div
         ref={contentRef}
-        className="hero__content relative z-3 flex flex-col items-center text-center gap-1.5 px-8 w-full max-w-[1100px] max-[700px]:gap-0.5"
+        className="hero__content relative z-3 flex flex-col items-center text-center gap-1.5 px-4 sm:px-8 w-full max-w-[1100px] max-[700px]:gap-0.5"
       >
         <p className="hero__college font-['Space_Grotesk',sans-serif] text-[0.8rem] md:text-[0.8rem] max-md:text-[0.6rem] font-medium tracking-[3px] md:tracking-[4px] uppercase text-text-dim opacity-0 mb-0">
           GOVERNMENT COLLEGE OF ENGINEERING &amp; CERAMIC TECHNOLOGY
@@ -205,7 +205,7 @@ const HeroSection = () => {
           Where Creativity Meets Celebration ...
         </p>
 
-        <div className="hero__cta-group flex flex-col md:flex-row gap-4 mt-4 opacity-0 items-center w-full md:w-auto">
+        <div className="hero__cta-group flex flex-col sm:flex-row gap-3 mt-4 opacity-0 items-center w-full md:w-auto">
           <a
             href="#events"
             className="hero__btn hero__btn--primary font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase py-[0.85rem] px-[2.2rem] w-full max-w-[280px] md:w-auto text-center cursor-pointer transition-transform duration-300 bg-accent text-bg border-none hover:bg-accent-hover hover:-translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm no-underline"

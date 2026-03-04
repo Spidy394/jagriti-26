@@ -66,7 +66,7 @@ const ContactSection = () => {
       {/* Decorative accent line at top */}
       <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-accent/50 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-8 md:px-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16">
         {/* Header */}
         <div className="contact-anim mb-16 md:mb-20">
           <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[5px] uppercase text-accent mb-3">

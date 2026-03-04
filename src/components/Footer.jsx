@@ -58,7 +58,7 @@ const FooterContent = () => {
       {/* Gold accent top line */}
       <div className="h-px bg-linear-to-r from-transparent via-accent to-transparent opacity-60" />
 
-      <div className="max-w-7xl mx-auto px-10 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 py-16">
         {/* Main grid */}
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-12">
           {/* Brand column */}

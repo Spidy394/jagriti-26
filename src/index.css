@@ -67,6 +67,9 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Prevent iOS from auto-scaling text in landscape */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
@@ -86,6 +89,24 @@
   video {
     display: block;
     max-width: 100%;
+  }
+
+  /* Remove 300ms tap delay on all interactive elements */
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  label {
+    touch-action: manipulation;
+  }
+
+  /* Ensure minimum tap target size of 44px for touch */
+  button,
+  [role="button"] {
+    min-height: 44px;
+    cursor: pointer;
   }
 }
 
@@ -155,4 +176,39 @@
   font-size: 2rem;
   color: var(--color-text-dim);
   opacity: 0.3;
+}
+
+/* ══════════════════════════════════════
+   MOBILE / SAFE-AREA UTILITIES
+   ══════════════════════════════════════ */
+
+/* Notched-phone safe area for the navbar */
+#navbar {
+  padding-top: max(0.75rem, env(safe-area-inset-top));
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+/* Hide scrollbars on overflow-x containers (mobile ticker) */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prevent content shift when modal/overlay opens */
+body.menu-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* Improve tap feedback on cards */
+@media (hover: none) {
+  .team-card:active,
+  .team-card:focus-visible {
+    border-color: var(--color-accent) / 0.4;
+    transform: translateY(-4px);
+  }
 }
