@@ -78,12 +78,15 @@ const Navbar = () => {
         </ul>
 
         {/* Desktop CTA */}
-        <button
+        <a
           id="nav-register-btn"
-          className="hidden md:block font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[1.5px] uppercase text-bg bg-accent border-none py-[0.6rem] px-6 cursor-pointer transition duration-300 hover:bg-accent-hover hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
+          href="https://forms.gle/bzqzBgswUN2khZ8L9"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:block font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[1.5px] uppercase text-bg bg-accent border-none py-[0.6rem] px-6 cursor-pointer transition duration-300 hover:bg-accent-hover hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm no-underline"
         >
           Register
-        </button>
+        </a>
 
         {/* Mobile hamburger */}
         <button
@@ -126,12 +129,15 @@ const Navbar = () => {
             {link}
           </a>
         ))}
-        <button
-          className="font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[1.5px] uppercase text-bg bg-accent border-none py-[0.6rem] px-6 cursor-pointer transition duration-300 hover:bg-accent-hover hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
+        <a
+          href="https://forms.gle/bzqzBgswUN2khZ8L9"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[1.5px] uppercase text-bg bg-accent border-none py-[0.6rem] px-6 cursor-pointer transition duration-300 hover:bg-accent-hover hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm no-underline"
           onClick={handleLinkClick}
         >
           Register
-        </button>
+        </a>
       </div>
     </>
   );

@@ -20,7 +20,12 @@ const FooterContent = () => {
   ];
 
   const participateLinks = [
-    { label: "Register Now", href: "#register" },
+    {
+      label: "Register Now",
+      href: "https://forms.gle/bzqzBgswUN2khZ8L9",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
     { label: "Become a Sponsor", href: "#sponsors" },
     { label: "Volunteer", href: "#contact" },
   ];
@@ -107,6 +112,8 @@ const FooterContent = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
+                    target={link.target}
+                    rel={link.rel}
                     className="font-['Space_Grotesk',sans-serif] text-[0.875rem] text-text-dim tracking-[1px] transition-colors duration-300 hover:text-accent"
                   >
                     {link.label}

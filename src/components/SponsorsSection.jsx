@@ -14,7 +14,7 @@ const sponsorTiers = [
     ],
   },
   {
-    name: "Co-Sponsored By",
+    name: "Co-Powered By",
     sponsors: [
       { name: "Synapsis Medical", img: "/images/sponcers/synapsismedical.png" },
       // { name: "TCS", logo: "TCS" },

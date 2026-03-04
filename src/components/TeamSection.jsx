@@ -23,25 +23,30 @@ const members = [
     initials: "RM",
     img: "/images/team/Rudrajyoty_Mahata.png",
   },
-  { name: "Rajarshee Hazari", role: "Treasurer", initials: "RH", img: null },
-  { name: "Debrup Das", role: "Game Secretary", initials: "DD", img: null },
+  { name: "Rajarshee Hazari", role: "Treasurer", initials: "RH", img: "images/team/Rajarshee_Hazari.png" },
+  {
+    name: "Debrup Das",
+    role: "Game Secretary",
+    initials: "DD",
+    img: "images/team/Debrup_Das.png",
+  },
   {
     name: "Bidwattar Kar",
     role: "Cultural Secretary",
     initials: "BK",
-    img: null,
+    img: "images/team/Bidwattar_Kar.png",
   },
   {
     name: "Pratik Haldar",
     role: "Asst. General Secretary",
     initials: "PH",
-    img: null,
+    img: "images/team/Pratik_Haldar.png",
   },
   {
     name: "Epsita Dutta",
     role: "Public Relation Lead",
     initials: "ED",
-    img: null,
+    img: "images/team/Epsita_Dutta.png",
   },
 ];
 

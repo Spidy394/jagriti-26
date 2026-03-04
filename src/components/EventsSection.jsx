@@ -241,7 +241,9 @@ const EventCard = ({ event, isActive, onHover, onLeave, isAnyActive }) => {
             {event.date}
           </p>
           <a
-            href="#register"
+            href="https://forms.gle/bzqzBgswUN2khZ8L9"
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[2px] uppercase px-5 py-2 border transition duration-300 hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm"
             style={{
               borderColor: event.accentColor,
