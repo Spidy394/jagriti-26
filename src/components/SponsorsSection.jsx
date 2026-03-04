@@ -9,14 +9,23 @@ const sponsorTiers = [
   {
     name: "Powered By",
     sponsors: [
-      { name: "Sen", img: "/images/sponcers/sen.jpeg" },
-      { name: "Raj", img: "/images/sponcers/raj.jpeg" },
+      {
+        name: "S-Gen Consortium Infra Pvt. Ltd.",
+        img: "/images/sponcers/sen.jpeg",
+      },
+      {
+        name: "Raj Ihira Projects Pvt. Ltd.",
+        img: "/images/sponcers/raj.jpeg",
+      },
     ],
   },
   {
     name: "Co-Powered By",
     sponsors: [
-      { name: "Synapsis Medical", img: "/images/sponcers/synapsismedical.png" },
+      {
+        name: "Synapsis Medical Technologies Inc.",
+        img: "/images/sponcers/synapsismedical.png",
+      },
       // { name: "TCS", logo: "TCS" },
       // { name: "Cognizant", logo: "CTS" },
       // { name: "IBM", logo: "IBM" },
@@ -35,8 +44,15 @@ const sponsorTiers = [
 const SponsorsSection = () => {
   const sectionRef = useRef(null);
 
-  // Create an array of 12 placeholders for the main ticker
-  const tickerItems = Array.from({ length: 12 }, (_, i) => `Partner 0${i + 1}`);
+  // Actual partner names for the marquee ribbon
+  const tickerItems = [
+    "S-Gen Consortium Infra",
+    "Raj Ihira Projects",
+    "Synapsis Medical",
+    "S-Gen Consortium Infra",
+    "Raj Ihira Projects",
+    "Synapsis Medical",
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
