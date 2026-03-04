@@ -71,7 +71,7 @@ const FooterContent = () => {
                 26
               </span>
             </div>
-            <p className="font-['Space_Grotesk',sans-serif] text-[0.85rem] text-text-dim leading-relaxed max-w-[260px]">
+            <p className="font-['Space_Grotesk',sans-serif] text-[0.85rem] text-text-dim leading-relaxed max-w-65">
               The annual cultural fest of Government College of Engineering
               &amp; Ceramic Technology, Kolkata. Where creativity meets
               celebration.
@@ -80,6 +80,17 @@ const FooterContent = () => {
             <div className="w-12 h-px bg-accent opacity-40 mt-1" />
             <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] text-text-dim/50 tracking-[2px] uppercase">
               © 2026 Jagriti GCECT. All rights reserved.
+            </p>
+            <p className="font-['Space_Grotesk',sans-serif] text-[0.65rem] text-text-dim/35 tracking-[1px]">
+              made by{" "}
+              <a
+                href="https://github.com/Spidy394"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent/70 transition-colors duration-300"
+              >
+                Shubhodeep
+              </a>
             </p>
           </div>
 
@@ -136,7 +147,7 @@ const FooterContent = () => {
                   aria-label={s.label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text-dim transition-[color,transform] duration-300 hover:text-accent hover:-translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+                  className="text-text-dim transition-[color,transform] duration-300 hover:text-accent hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
                 >
                   {s.icon}
                 </a>
