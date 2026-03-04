@@ -16,7 +16,7 @@ const EventMobileCard = ({ event }) => {
       >
         {/* Accent top edge */}
         <div
-          className="absolute top-0 left-0 right-0 h-[2px]"
+          className="absolute top-0 left-0 right-0 h-0.5"
           style={{ background: event.accentColor, opacity: 0.8 }}
         />
 
@@ -59,62 +59,85 @@ const EventMobileCard = ({ event }) => {
 
       {/* Expandable content */}
       <div
-        className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${isOpen ? "max-h-[600px]" : "max-h-0"}`}
+        className={`overflow-hidden transition-[max-height] duration-500 ease-in-out ${isOpen ? "max-h-150" : "max-h-0"}`}
       >
-        <div className="p-5 flex flex-col gap-3 bg-bg-raised">
-          <p className="font-['Space_Grotesk',sans-serif] text-[0.82rem] text-text-dim leading-relaxed">
-            {event.description}
-          </p>
+        <div className="relative p-5 flex flex-col gap-3">
+          {/* Background image */}
+          {event.img && (
+            <img
+              src={event.img}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
+          {/* Dark + accent gradient overlay so text stays readable */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(160deg, ${event.color}ee 0%, #0a0a0acc 60%, #0a0a0af5 100%)`,
+            }}
+          />
 
-          <ul className="flex flex-col gap-1.5">
-            {event.highlights.map((h) => (
-              <li key={h} className="flex items-center gap-2">
-                <span
-                  className="w-1 h-1 rounded-full shrink-0"
-                  style={{ background: event.accentColor }}
-                />
-                <span className="font-['Space_Grotesk',sans-serif] text-[0.75rem] text-text-dim">
-                  {h}
-                </span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="flex items-center justify-between gap-4 pt-3 border-t border-white/10">
-            <div>
-              <p className="font-['Space_Grotesk',sans-serif] text-[0.6rem] tracking-[3px] uppercase text-text-dim/60 mb-0.5">
-                Prize Pool
-              </p>
-              <p
-                className="font-['Space_Grotesk',sans-serif] text-lg font-bold"
-                style={{ color: event.accentColor }}
-              >
-                {event.prize}
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="font-['Space_Grotesk',sans-serif] text-[0.6rem] tracking-[3px] uppercase text-text-dim/60 mb-0.5">
-                Registration
-              </p>
-              <p className="font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold text-text">
-                {event.regFee}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between pt-2">
-            <p className="font-['Space_Grotesk',sans-serif] text-[0.65rem] tracking-[2px] uppercase text-text-dim/60">
-              {event.date}
+          {/* Content sits above the bg */}
+          <div className="relative z-10 flex flex-col gap-3">
+            <p className="font-['Space_Grotesk',sans-serif] text-[0.82rem] text-text-dim leading-relaxed">
+              {event.description}
             </p>
-            <a
-              href="https://forms.gle/bzqzBgswUN2khZ8L9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[2px] uppercase px-4 py-2 border rounded-sm transition duration-300 active:opacity-70 min-h-[44px] flex items-center"
-              style={{ borderColor: event.accentColor, color: event.accentColor }}
-            >
-              Register
-            </a>
+
+            <ul className="flex flex-col gap-1.5">
+              {event.highlights.map((h) => (
+                <li key={h} className="flex items-center gap-2">
+                  <span
+                    className="w-1 h-1 rounded-full shrink-0"
+                    style={{ background: event.accentColor }}
+                  />
+                  <span className="font-['Space_Grotesk',sans-serif] text-[0.75rem] text-text-dim">
+                    {h}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex items-center justify-between gap-4 pt-3 border-t border-white/10">
+              <div>
+                <p className="font-['Space_Grotesk',sans-serif] text-[0.6rem] tracking-[3px] uppercase text-text-dim/60 mb-0.5">
+                  Prize Pool
+                </p>
+                <p
+                  className="font-['Space_Grotesk',sans-serif] text-lg font-bold"
+                  style={{ color: event.accentColor }}
+                >
+                  {event.prize}
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="font-['Space_Grotesk',sans-serif] text-[0.6rem] tracking-[3px] uppercase text-text-dim/60 mb-0.5">
+                  Registration
+                </p>
+                <p className="font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold text-text">
+                  {event.regFee}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-2">
+              <p className="font-['Space_Grotesk',sans-serif] text-[0.65rem] tracking-[2px] uppercase text-text-dim/60">
+                {event.date}
+              </p>
+              <a
+                href="https://forms.gle/bzqzBgswUN2khZ8L9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[2px] uppercase px-4 py-2 border rounded-sm transition duration-300 active:opacity-70 min-h-11 flex items-center"
+                style={{
+                  borderColor: event.accentColor,
+                  color: event.accentColor,
+                }}
+              >
+                Register
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -316,7 +339,7 @@ const EventCard = ({ event, isActive, onHover, onLeave, isAnyActive }) => {
         />
 
         {/* Description */}
-        <p className="font-['Space_Grotesk',sans-serif] text-[0.82rem] text-text-dim leading-relaxed mb-5 max-w-[340px]">
+        <p className="font-['Space_Grotesk',sans-serif] text-[0.82rem] text-text-dim leading-relaxed mb-5 max-w-85">
           {event.description}
         </p>
 
@@ -388,7 +411,7 @@ const EventCard = ({ event, isActive, onHover, onLeave, isAnyActive }) => {
 
       {/* Thin accent top edge */}
       <div
-        className="absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-500"
+        className="absolute top-0 left-0 right-0 h-0.5 transition-opacity duration-500"
         style={{
           background: event.accentColor,
           opacity: isActive ? 0.8 : 0.2,
@@ -423,7 +446,7 @@ const EventsSection = () => {
 
       {/* ── Desktop: horizontal hover accordion (hidden on mobile) ── */}
       <div
-        className="hidden md:flex justify-center h-[82vh] min-h-[560px] max-h-[860px] w-full"
+        className="hidden md:flex justify-center h-[82vh] min-h-140 max-h-215 w-full"
         onMouseLeave={() => setActiveId(events[0].id)}
       >
         {events.map((event) => (

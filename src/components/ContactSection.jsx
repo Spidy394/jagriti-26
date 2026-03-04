@@ -66,7 +66,7 @@ const ContactSection = () => {
       {/* Decorative accent line at top */}
       <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-accent/50 to-transparent" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16">
         {/* Header */}
         <div className="contact-anim mb-16 md:mb-20">
           <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[5px] uppercase text-accent mb-3">
@@ -126,7 +126,7 @@ const ContactSection = () => {
                 GCECT, Beliaghata, Kolkata
               </span>
             </div>
-            <div className="relative min-h-[340px] lg:min-h-[420px] border border-border rounded-b-sm overflow-hidden">
+            <div className="relative min-h-85 lg:min-h-105 border border-border rounded-b-sm overflow-hidden">
               <iframe
                 title="GCECT Location"
                 src="https://maps.google.com/maps?q=Government+College+of+Engineering+and+Ceramic+Technology+Kolkata&t=&z=15&ie=UTF8&iwloc=&output=embed"
@@ -140,7 +140,7 @@ const ContactSection = () => {
       </div>
 
       {/* Decorative bottom glow */}
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[200px] bg-accent/4 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-100 h-50 bg-accent/4 rounded-full blur-[100px] pointer-events-none" />
     </section>
   );
 };

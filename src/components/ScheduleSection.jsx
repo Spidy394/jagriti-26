@@ -115,7 +115,7 @@ const ScheduleSection = () => {
           backgroundSize: "60px 60px",
         }}
       />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-accent/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-200 h-125 bg-accent/5 blur-[120px] rounded-full pointer-events-none -z-10" />
 
       {/* ── Header Area ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 flex flex-col items-center text-center mb-20">
@@ -185,7 +185,7 @@ const ScheduleSection = () => {
       {/* ── Vertical Timeline ── */}
       <div className="max-w-4xl mx-auto px-4 sm:px-8 md:px-16 relative">
         {/* Central Vertical Line */}
-        <div className="absolute left-[39px] md:left-[119px] top-6 bottom-6 w-px bg-accent/20" />
+        <div className="absolute left-9.75 md:left-29.75 top-6 bottom-6 w-px bg-accent/20" />
 
         <div className="flex flex-col gap-10">
           {currentData.events.map((event, index) => {
@@ -223,7 +223,7 @@ const ScheduleSection = () => {
 
                 {/* Node on the Line */}
                 <div
-                  className="relative md:absolute md:left-1/2 md:-ml-[9px] z-10 w-4 h-4 rounded-full bg-bg border-2 mt-[22px] md:mt-[24px] shrink-0 transition-transform duration-500 group-hover:scale-[1.3] group-hover:bg-accent/10"
+                  className="relative md:absolute md:left-1/2 md:-ml-2.25 z-10 w-4 h-4 rounded-full bg-bg border-2 mt-5.5 md:mt-6 shrink-0 transition-transform duration-500 group-hover:scale-[1.3] group-hover:bg-accent/10"
                   style={{
                     borderColor: event.color,
                     boxShadow: `0 0 15px ${event.color}30`,

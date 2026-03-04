@@ -112,7 +112,7 @@ const BandCard = ({ band, index }) => (
     onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#2a2a2a")}
   >
     {/* ── Left: image panel ── */}
-    <div className="relative shrink-0 overflow-hidden w-full md:w-[360px] h-[200px] md:h-[320px]">
+    <div className="relative shrink-0 overflow-hidden w-full md:w-90 h-50 md:h-80">
       {band.img ? (
         <img
           src={band.img}
@@ -180,7 +180,7 @@ const BandCard = ({ band, index }) => (
         style={{ width: "2.5rem", background: band.accentColor, opacity: 0.5 }}
       />
 
-      <p className="font-['Space_Grotesk',sans-serif] text-[0.78rem] text-text-dim leading-relaxed mb-5 max-w-[240px]">
+      <p className="font-['Space_Grotesk',sans-serif] text-[0.78rem] text-text-dim leading-relaxed mb-5 max-w-60">
         {band.description}
       </p>
 
@@ -221,7 +221,7 @@ const BandCard = ({ band, index }) => (
 
     {/* Accent top edge */}
     <div
-      className="absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-500 opacity-20 group-hover:opacity-80"
+      className="absolute top-0 left-0 right-0 h-0.5 transition-opacity duration-500 opacity-20 group-hover:opacity-80"
       style={{ background: band.accentColor }}
     />
   </div>
@@ -234,42 +234,30 @@ const BandLineupSection = () => {
   const cardsRef = useRef([]);
 
   useEffect(() => {
-    // Only run GSAP stacking animation on desktop (md+)
-    if (window.innerWidth < 768) return;
+    const mm = gsap.matchMedia();
 
-    let ctx = gsap.context(() => {
-      // Set up the timeline that pins the section
+    mm.add("(min-width: 768px)", () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          // The scroll distance determines how long the pin lasts.
-          // Increased to 2.5 to give more time for cards to animate before unpinning.
           end: () => `+=${window.innerHeight * 2.5}`,
           scrub: 1,
           pin: true,
-          pinSpacing: true, // Ensure spacing is added so the next section waits
-          // Markers are useful for debugging but should be disabled in production
-          // markers: true,
+          pinSpacing: true,
         },
       });
 
-      // Animate cards 1 and 2 (indices 1 & 2) up from the bottom
       cardsRef.current.forEach((card, index) => {
-        if (index === 0) return; // First card is already positioned
-
-        // Card starts off screen below
+        if (index === 0) return;
         gsap.set(card, { y: window.innerHeight });
-
-        // Card slides up to its final offset position (stacking effect)
-        tl.to(card, {
-          y: index * 35, // The top offset for the 3D stack
-          ease: "none",
-        });
+        tl.to(card, { y: index * 35, ease: "none" });
       });
-    }, sectionRef);
 
-    return () => ctx.revert();
+      return () => tl.kill();
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (
@@ -296,7 +284,7 @@ const BandLineupSection = () => {
       {/* overflow-hidden so the cards coming from below don't leak out of the section bounds */}
       <div
         ref={containerRef}
-        className="hidden md:flex relative w-full min-h-[420px] pb-12 justify-center items-start overflow-hidden mt-10"
+        className="hidden md:flex relative w-full min-h-105 pb-12 justify-center items-start overflow-hidden mt-10"
       >
         <div className="relative w-full max-w-5xl px-4 md:px-8 flex justify-center">
           {bands.map((band, i) => (

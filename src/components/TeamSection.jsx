@@ -23,7 +23,12 @@ const members = [
     initials: "RM",
     img: "/images/team/Rudrajyoty_Mahata.png",
   },
-  { name: "Rajarshee Hazari", role: "Treasurer", initials: "RH", img: "images/team/Rajarshee_Hazari.png" },
+  {
+    name: "Rajarshee Hazari",
+    role: "Treasurer",
+    initials: "RH",
+    img: "images/team/Rajarshee_Hazari.png",
+  },
   {
     name: "Debrup Das",
     role: "Game Secretary",
@@ -53,44 +58,67 @@ const members = [
 /* Swap src="/team/filename.jpg" into <img> once you have real photos */
 const MemberCard = ({ member }) => (
   <div
-    className="team-card group relative flex flex-col overflow-hidden border border-border bg-bg transition-[border-color,transform,box-shadow] duration-500 hover:border-accent/40 hover:-translate-y-2 hover:shadow-[0_16px_40px_rgba(201,169,78,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+    className="team-card group relative flex flex-col overflow-hidden border border-border bg-bg transition-[border-color,transform,box-shadow] duration-500
+      hover:border-accent/40 hover:-translate-y-2 hover:shadow-[0_16px_40px_rgba(201,169,78,0.12)]
+      [@media(hover:none)]:border-accent/30
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
     style={{ opacity: 0 }}
     tabIndex={0}
   >
     {/* Photo area */}
     <div className="relative aspect-3/4 overflow-hidden bg-bg-raised">
-      {/* Gradient background (visible for placeholder cards) */}
-      <div className="absolute inset-0 bg-linear-to-br from-[#111] via-[#222] to-[#0d0d0d] group-hover:from-[#1a1400] group-hover:via-[#2a2000] transition-colors duration-500" />
+      {/* Gradient background — warm gold tint always on touch, hover-only on desktop */}
+      <div
+        className="absolute inset-0 bg-linear-to-br from-[#111] via-[#222] to-[#0d0d0d] transition-colors duration-500
+        group-hover:from-[#1a1400] group-hover:via-[#2a2000]
+        [@media(hover:none)]:from-[#1a1400] [@media(hover:none)]:via-[#2a2000] [@media(hover:none)]:to-[#0d0d0d]"
+      />
 
-      {/* Photo layered on top when available */}
+      {/* Photo — grayscale on desktop until hover; full color always on touch */}
       {member.img && (
         <img
           src={member.img}
           alt={member.name}
-          className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-80 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100"
+          className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-500
+            grayscale opacity-80
+            group-hover:grayscale-0 group-hover:opacity-100
+            [@media(hover:none)]:grayscale-0 [@media(hover:none)]:opacity-100"
         />
       )}
 
-      {/* Gold shimmer overlay on hover */}
-      <div className="absolute inset-0 bg-linear-to-t from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Gold shimmer overlay — hover on desktop, always on touch */}
+      <div
+        className="absolute inset-0 bg-linear-to-t from-accent/10 to-transparent transition-opacity duration-500
+        opacity-0 group-hover:opacity-100
+        [@media(hover:none)]:opacity-100"
+      />
     </div>
 
     {/* Info */}
-    <div className="px-5 py-4 flex flex-col gap-1 border-t border-border group-hover:border-accent/30 transition-colors duration-300 relative">
-      <p className="font-['Space_Grotesk',sans-serif] text-[0.65rem] font-semibold tracking-[3px] uppercase text-accent/70 relative z-10 bg-bg transition-colors duration-500">
+    <div className="px-5 py-4 flex flex-col gap-1 border-t border-border group-hover:border-accent/30 [@media(hover:none)]:border-accent/20 transition-colors duration-300 relative">
+      <p className="font-['Space_Grotesk',sans-serif] text-[0.65rem] font-semibold tracking-[3px] uppercase text-accent/70 relative z-10">
         {member.role}
       </p>
 
-      {/* Name reveals on hover */}
+      {/* Name — revealed on hover (desktop) / always visible on touch */}
       <div className="overflow-hidden">
-        <h3 className="font-['Space_Grotesk',sans-serif] text-[0.95rem] font-semibold text-text leading-snug opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
+        <h3
+          className="font-['Space_Grotesk',sans-serif] text-[0.95rem] font-semibold text-text leading-snug transition-all duration-500 ease-out
+          opacity-0 translate-y-full
+          group-hover:opacity-100 group-hover:translate-y-0
+          [@media(hover:none)]:opacity-100 [@media(hover:none)]:translate-y-0"
+        >
           {member.name}
         </h3>
       </div>
     </div>
 
-    {/* Bottom accent line — slides in on hover */}
-    <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-accent group-hover:w-full transition-[width] duration-500" />
+    {/* Bottom accent line — hover on desktop / always visible on touch */}
+    <div
+      className="absolute bottom-0 left-0 h-0.5 bg-accent transition-[width] duration-500
+      w-0 group-hover:w-full
+      [@media(hover:none)]:w-full [@media(hover:none)]:opacity-40"
+    />
   </div>
 );
 
@@ -134,7 +162,7 @@ const TeamSection = () => {
       {/* Top accent line */}
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-accent/40 to-transparent" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16">
         {/* Header */}
         <div className="team-header flex flex-col gap-4 mb-16 md:mb-20">
           <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[5px] uppercase text-accent">
@@ -155,7 +183,7 @@ const TeamSection = () => {
       </div>
 
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/3 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-accent/3 rounded-full blur-[150px] pointer-events-none" />
     </section>
   );
 };

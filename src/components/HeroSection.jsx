@@ -21,14 +21,12 @@ const HeroSection = () => {
         ".hero__college",
         ".hero__presents",
         ".hero__line",
-        ".hero__title-block", // animate block, not inner gradient-text
+        ".hero__title-block", // animate block (includes inner "26" span)
         ".hero__tagline",
         ".hero__cta-group",
       ],
       { y: 40, opacity: 0 },
     );
-    // title-year needs y offset too
-    gsap.set(".hero__title-year", { y: 40 });
 
     // ── Entrance timeline ──
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -153,7 +151,7 @@ const HeroSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="hero sticky top-0 z-0 w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
+      className="hero sticky top-0 z-0 w-full h-screen min-h-150 flex items-center justify-center overflow-hidden"
       id="hero"
     >
       {/* Background video */}
@@ -177,7 +175,7 @@ const HeroSection = () => {
       {/* Content — dramatic Sanskriti-style layout */}
       <div
         ref={contentRef}
-        className="hero__content relative z-3 flex flex-col items-center text-center gap-1.5 px-4 sm:px-8 w-full max-w-[1100px] max-[700px]:gap-0.5"
+        className="hero__content relative z-3 flex flex-col items-center text-center gap-1.5 px-4 sm:px-8 w-full max-w-275 max-[700px]:gap-0.5"
       >
         <p className="hero__college font-['Space_Grotesk',sans-serif] text-[0.8rem] md:text-[0.8rem] max-md:text-[0.6rem] font-medium tracking-[3px] md:tracking-[4px] uppercase text-text-dim opacity-0 mb-0">
           GOVERNMENT COLLEGE OF ENGINEERING &amp; CERAMIC TECHNOLOGY
@@ -188,27 +186,27 @@ const HeroSection = () => {
         </p>
 
         {/* Decorative horizontal line */}
-        <div className="hero__line w-[80%] md:w-[60%] max-w-[500px] h-px bg-accent opacity-0 origin-center mb-1"></div>
+        <div className="hero__line w-[80%] md:w-[60%] max-w-125 h-px bg-accent opacity-0 origin-center mb-1"></div>
 
         {/* Title block */}
-        <div className="hero__title-block flex items-baseline justify-center gap-0 leading-none select-none text-balance">
+        <div className="hero__title-block flex items-baseline justify-center gap-0 leading-none select-none">
           {/* Main title colourized like the logo with a gold gradient */}
-          <h1 className="hero__title-main font-['Samarkan',serif] text-[clamp(3.5rem,16vw,6rem)] md:text-[clamp(5rem,18vw,14rem)] tracking-[4px] m-0 text-balance">
+          <h1 className="hero__title-main font-['Samarkan',serif] text-[clamp(2.8rem,13vw,6rem)] md:text-[clamp(5rem,18vw,14rem)] tracking-[4px] m-0 whitespace-nowrap">
             Jagriti
           </h1>
-          <span className="hero__title-year font-['Samarkan',serif] text-[clamp(1.8rem,7vw,3rem)] md:text-[clamp(2.5rem,8vw,6rem)] text-accent tracking-[2px] leading-[0.85] relative top-[0.15em]">
+          <span className="hero__title-year font-['Samarkan',serif] text-[clamp(1.4rem,6vw,3rem)] md:text-[clamp(2.5rem,8vw,6rem)] text-accent tracking-[2px] leading-[0.85] relative top-[0.15em] whitespace-nowrap">
             26
           </span>
         </div>
 
-        <p className="hero__tagline font-['Samarkan',serif] text-[0.85rem] md:text-[clamp(0.9rem,2.2vw,1.5rem)] font-normal italic text-text-dim tracking-[2px] md:tracking-[3px] mt-2 opacity-0">
+        <p className="hero__tagline font-['Samarkan',serif] text-[0.75rem] sm:text-[0.85rem] md:text-[clamp(0.9rem,2.2vw,1.5rem)] font-normal italic text-text-dim tracking-[2px] md:tracking-[3px] mt-3 sm:mt-4 opacity-0">
           Where Creativity Meets Celebration ...
         </p>
 
         <div className="hero__cta-group flex flex-col sm:flex-row gap-3 mt-4 opacity-0 items-center w-full md:w-auto">
           <a
             href="#events"
-            className="hero__btn hero__btn--primary font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase py-[0.85rem] px-[2.2rem] w-full max-w-[280px] md:w-auto text-center cursor-pointer transition-transform duration-300 bg-accent text-bg border-none hover:bg-accent-hover hover:-translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm no-underline"
+            className="hero__btn hero__btn--primary font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase py-[0.85rem] px-[2.2rem] w-full max-w-70 md:w-auto text-center cursor-pointer transition-transform duration-300 bg-accent text-bg border-none hover:bg-accent-hover hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm no-underline"
             id="hero-explore-btn"
           >
             Explore Events
@@ -218,7 +216,7 @@ const HeroSection = () => {
             href="https://forms.gle/bzqzBgswUN2khZ8L9"
             target="_blank"
             rel="noopener noreferrer"
-            className="hero__btn hero__btn--outline font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase py-[0.85rem] px-[2.2rem] w-full max-w-[280px] md:w-auto text-center cursor-pointer transition-transform duration-300 bg-transparent text-text border border-border hover:border-accent hover:text-accent hover:-translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm no-underline"
+            className="hero__btn hero__btn--outline font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase py-[0.85rem] px-[2.2rem] w-full max-w-70 md:w-auto text-center cursor-pointer transition-transform duration-300 bg-transparent text-text border border-border hover:border-accent hover:text-accent hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm no-underline"
           >
             Register Now
           </a>
@@ -230,7 +228,7 @@ const HeroSection = () => {
         <span className="hero__scroll-text font-['Space_Grotesk',sans-serif] text-[0.65rem] tracking-[3px] uppercase text-text-dim">
           Scroll
         </span>
-        <div className="hero__scroll-line w-px h-[40px] bg-border relative overflow-hidden after:content-[''] after:absolute after:-top-full after:left-0 after:w-full after:h-full after:bg-accent after:animate-scroll-pulse"></div>
+        <div className="hero__scroll-line w-px h-10 bg-border relative overflow-hidden after:content-[''] after:absolute after:-top-full after:left-0 after:w-full after:h-full after:bg-accent after:animate-scroll-pulse"></div>
       </div>
     </section>
   );
