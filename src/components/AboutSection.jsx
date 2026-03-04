@@ -6,26 +6,36 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* Placeholder card – swap src for a real image when ready */
 const PhotoCard = ({ className, gradient, label, imgSrc }) => (
-  <div
-    className={`absolute rounded-sm overflow-hidden shadow-2xl border border-white/5 ${className}`}
-  >
-    {imgSrc ? (
-      <>
-        <img src={imgSrc} alt={label} className="w-full h-full object-cover" />
-        {/* Dark overlay so the label remains readable */}
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/80 to-transparent flex items-end">
-          <span className="p-3 text-[0.6rem] font-['Space_Grotesk',sans-serif] tracking-[2px] uppercase text-white/80 z-10">
-            {label}
-          </span>
-        </div>
-      </>
-    ) : (
-      <div className={`w-full h-full ${gradient} flex items-end`}>
-        <span className="p-3 text-[0.6rem] font-['Space_Grotesk',sans-serif] tracking-[2px] uppercase text-white/40">
-          {label}
-        </span>
+  <div className={`absolute ${className}`}>
+    {/* Clean White Frame */}
+    <div className="w-full h-full p-1 border border-white/20 md:p-[6px] bg-white/95 rounded-[4px] shadow-[0_8px_30px_rgba(255,255,255,0.1)] transition-all duration-500 group cursor-pointer flex flex-col hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(255,255,255,0.2)]">
+      {/* Inner masked container */}
+      <div className="relative w-full h-full overflow-hidden rounded-[2px]">
+        {imgSrc ? (
+          <>
+            <img
+              src={imgSrc}
+              alt={label}
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            />
+            {/* Dark overlay so the label remains readable */}
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/80 to-transparent flex items-end">
+              <span className="p-3 text-[0.6rem] font-['Space_Grotesk',sans-serif] tracking-[2px] uppercase text-white/80 z-10 transition-colors duration-300 group-hover:text-accent">
+                {label}
+              </span>
+            </div>
+          </>
+        ) : (
+          <div
+            className={`w-full h-full ${gradient} flex items-end transition-transform duration-700 ease-out group-hover:scale-110`}
+          >
+            <span className="p-3 text-[0.6rem] font-['Space_Grotesk',sans-serif] tracking-[2px] uppercase text-white/40">
+              {label}
+            </span>
+          </div>
+        )}
       </div>
-    )}
+    </div>
   </div>
 );
 
