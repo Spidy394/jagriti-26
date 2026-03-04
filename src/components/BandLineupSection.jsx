@@ -13,7 +13,7 @@ const bands = [
     time: "8 PM",
     accentColor: "#c9a94e",
     logo: null,
-    img: null,
+    img: "/images/broken_melody.jpg",
     description:
       "Setting the stage ablaze on opening night, Broken Melody brings raw indie energy and soulful guitar riffs that will resonate long after the last note fades.",
     tag: "Opening Night",
@@ -26,7 +26,7 @@ const bands = [
     time: null,
     accentColor: "#e8845a",
     logo: null,
-    img: null,
+    img: "/images/thefolkdiaryz.webp",
     description:
       "Weaving tales through acoustic strings and heartfelt vocals, The Folk Diaryz promise an intimate, spine-tingling journey through the soul of folk music.",
     tag: "Folk Night",
@@ -39,7 +39,7 @@ const bands = [
     time: "8 PM",
     accentColor: "#a855f7",
     logo: null,
-    img: null,
+    img: "/images/trap.webp",
     description:
       "Closing Jagriti '26 with a thunderous bang — TRAP delivers hard-hitting beats and electrifying bass drops in a high-energy performance you won't forget.",
     tag: "Headliner",
