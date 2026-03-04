@@ -9,27 +9,27 @@ const sponsorTiers = [
   {
     name: "Powered By",
     sponsors: [
-      { name: "Sen", logo: "DD" },
-      { name: "Raj", logo: "RC" },
+      { name: "Sen", img: "/images/sponcers/sen.jpeg" },
+      { name: "Raj", img: "/images/sponcers/raj.jpeg" },
     ],
   },
   {
     name: "Co-Sponsored By",
     sponsors: [
-      { name: "Tech Mahindra", logo: "TM" },
-      { name: "TCS", logo: "TCS" },
-      { name: "Cognizant", logo: "CTS" },
-      { name: "IBM", logo: "IBM" },
+      { name: "Synapsis Medical", img: "/images/sponcers/synapsismedical.png" },
+      // { name: "TCS", logo: "TCS" },
+      // { name: "Cognizant", logo: "CTS" },
+      // { name: "IBM", logo: "IBM" },
     ],
   },
-  {
-    name: "Food Partners",
-    sponsors: [
-      { name: "Wow Momo", logo: "WM" },
-      { name: "Keventers", logo: "KV" },
-      { name: "Dominos", logo: "DP" },
-    ],
-  },
+  // {
+  //   name: "Food Partners",
+  //   sponsors: [
+  //     { name: "Wow Momo", logo: "WM" },
+  //     { name: "Keventers", logo: "KV" },
+  //     { name: "Dominos", logo: "DP" },
+  //   ],
+  // },
 ];
 
 const SponsorsSection = () => {
@@ -110,13 +110,23 @@ const SponsorsSection = () => {
                 {tier.sponsors.map((sponsor, idx) => (
                   <div
                     key={idx}
-                    className="group relative flex items-center justify-center w-32 h-20 md:w-40 md:h-24 bg-bg-raised border border-border rounded-sm transition duration-300 hover:border-accent/40 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(201,169,78,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    className="group relative flex items-center justify-center w-40 h-28 md:w-56 md:h-32 bg-bg-raised border border-border rounded-sm transition duration-300 hover:border-accent/40 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(201,169,78,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     tabIndex={0}
                   >
-                    {/* Placeholder for Logo Image */}
-                    <span className="font-['Samarkan',serif] text-3xl text-text-dim/40 group-hover:text-accent/60 transition-colors">
-                      {sponsor.logo}
-                    </span>
+                    {/* Placeholder or Logo Image */}
+                    {sponsor.img ? (
+                      <div className="w-full h-full p-2 group-hover:drop-shadow-[0_0_15px_rgba(201,169,78,0.5)] transition-all duration-500">
+                        <img
+                          src={sponsor.img}
+                          alt={`${sponsor.name} logo`}
+                          className="w-full h-full object-contain mix-blend-screen"
+                        />
+                      </div>
+                    ) : (
+                      <span className="font-['Samarkan',serif] text-3xl text-text-dim/40 group-hover:text-accent/60 transition-colors">
+                        {sponsor.logo}
+                      </span>
+                    )}
 
                     {/* Tooltip for name */}
                     <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">

@@ -11,7 +11,12 @@ const members = [
     initials: "DD",
     img: "/images/team/Debojit_Das.png",
   },
-  { name: "Srit Biswas", role: "General Secretary", initials: "SB", img: "/images/team/Srit_Biswas.png" },
+  {
+    name: "Srit Biswas",
+    role: "General Secretary",
+    initials: "SB",
+    img: "/images/team/Srit_Biswas.png",
+  },
   {
     name: "Rudrajyoty Mahata",
     role: "Vice President",
@@ -41,7 +46,7 @@ const members = [
 ];
 
 /* Swap src="/team/filename.jpg" into <img> once you have real photos */
-const MemberCard = ({ member, index }) => (
+const MemberCard = ({ member }) => (
   <div
     className="team-card group relative flex flex-col overflow-hidden border border-border bg-bg transition-[border-color,transform,box-shadow] duration-500 hover:border-accent/40 hover:-translate-y-2 hover:shadow-[0_16px_40px_rgba(201,169,78,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
     style={{ opacity: 0 }}
@@ -50,34 +55,33 @@ const MemberCard = ({ member, index }) => (
     {/* Photo area */}
     <div className="relative aspect-3/4 overflow-hidden bg-bg-raised">
       {/* Gradient background (visible for placeholder cards) */}
-      <div className="absolute inset-0 bg-linear-to-br from-[#1a1400] via-[#2a2000] to-[#0d0d0d]" />
+      <div className="absolute inset-0 bg-linear-to-br from-[#111] via-[#222] to-[#0d0d0d] group-hover:from-[#1a1400] group-hover:via-[#2a2000] transition-colors duration-500" />
 
       {/* Photo layered on top when available */}
       {member.img && (
         <img
           src={member.img}
           alt={member.name}
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-80 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100"
         />
       )}
 
       {/* Gold shimmer overlay on hover */}
       <div className="absolute inset-0 bg-linear-to-t from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-      {/* Index number — top-right badge */}
-      <span className="absolute top-3 right-3 font-['Space_Grotesk',sans-serif] text-[0.6rem] tracking-[2px] text-accent/30">
-        {String(index + 1).padStart(2, "0")}
-      </span>
     </div>
 
     {/* Info */}
-    <div className="px-5 py-4 flex flex-col gap-1 border-t border-border group-hover:border-accent/30 transition-colors duration-300">
-      <p className="font-['Space_Grotesk',sans-serif] text-[0.65rem] font-semibold tracking-[3px] uppercase text-accent/70">
+    <div className="px-5 py-4 flex flex-col gap-1 border-t border-border group-hover:border-accent/30 transition-colors duration-300 relative">
+      <p className="font-['Space_Grotesk',sans-serif] text-[0.65rem] font-semibold tracking-[3px] uppercase text-accent/70 relative z-10 bg-bg transition-colors duration-500">
         {member.role}
       </p>
-      <h3 className="font-['Space_Grotesk',sans-serif] text-[0.95rem] font-semibold text-text leading-snug">
-        {member.name}
-      </h3>
+
+      {/* Name reveals on hover */}
+      <div className="overflow-hidden">
+        <h3 className="font-['Space_Grotesk',sans-serif] text-[0.95rem] font-semibold text-text leading-snug opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
+          {member.name}
+        </h3>
+      </div>
     </div>
 
     {/* Bottom accent line — slides in on hover */}
