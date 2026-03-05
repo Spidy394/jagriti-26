@@ -106,21 +106,21 @@ const AboutSection = () => {
               className="about-card w-[55%] aspect-4/3 top-0 right-6 rotate-3deg z-10"
               gradient="bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460]"
               label=""
-              imgSrc="/images/image3.png"
+              imgSrc="/images/image3.webp"
             />
             {/* Card 2 — center-left, larger, base */}
             <PhotoCard
               className="about-card w-[68%] aspect-4/3 top-1/2 -translate-y-1/2 left-0 -rotate-2 z-20"
               gradient="bg-gradient-to-br from-[#1c1400] via-[#2e2000] to-[#3d2900]"
               label=""
-              imgSrc="/images/image1.jpg"
+              imgSrc="/images/image1.webp"
             />
             {/* Card 3 — bottom-right, small accent card */}
             <PhotoCard
               className="about-card w-[42%] aspect-4/3 bottom-0 right-0 rotate-2d z-30"
               gradient="bg-gradient-to-br from-[#1a0020] via-[#2d0040] to-[#1a0020]"
               label=""
-              imgSrc="/images/image2.jpeg"
+              imgSrc="/images/image2.webp"
             />
 
             {/* Decorative accent dot */}

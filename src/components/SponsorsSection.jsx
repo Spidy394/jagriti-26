@@ -11,11 +11,11 @@ const sponsorTiers = [
     sponsors: [
       {
         name: "S-Gen Consortium Infra Pvt. Ltd.",
-        img: "/images/sponcers/sen.jpeg",
+        img: "/images/sponcers/sen.webp",
       },
       {
         name: "Raj Ihira Projects Pvt. Ltd.",
-        img: "/images/sponcers/raj.jpeg",
+        img: "/images/sponcers/raj.webp",
       },
     ],
   },
@@ -24,7 +24,7 @@ const sponsorTiers = [
     sponsors: [
       {
         name: "Synapsis Medical Technologies Inc.",
-        img: "/images/sponcers/synapsismedical.png",
+        img: "/images/sponcers/synapsismedical.webp",
       },
       // { name: "TCS", logo: "TCS" },
       // { name: "Cognizant", logo: "CTS" },

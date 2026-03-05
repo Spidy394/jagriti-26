@@ -13,7 +13,7 @@ const bands = [
     time: "8 PM",
     accentColor: "#c9a94e",
     logo: null,
-    img: "/images/broken_melody.jpg",
+    img: "/images/broken_melody.webp",
     description:
       "Setting the stage ablaze on opening night, Broken Melody brings raw indie energy and soulful guitar riffs that will resonate long after the last note fades.",
     tag: "Opening Night",

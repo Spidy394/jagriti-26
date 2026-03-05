@@ -73,7 +73,7 @@ const scheduleData = {
         ampm: "PM",
         duration: 2.5,
         title: "MUSICON (BANDS)",
-        category: "TECHNICAL", // Reusing category color for demo
+        category: "CULTURAL", // Reusing category color for demo
         color: "#7c3aed",
       },
       {

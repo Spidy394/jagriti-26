@@ -156,7 +156,7 @@ const events = [
     regFee: "₹800 / team",
     color: "#1a0a2e",
     accentColor: "#7c3aed",
-    img: "/images/events/musicon.jpg", // placeholder — swap for /images/musicon.jpg
+    img: "/images/events/musicon.webp", // placeholder — swap for /images/musicon.webp
     description:
       "An inter-college band competition where music groups battle it out on stage. Bring your instruments and your passion.",
     highlights: [
@@ -175,7 +175,7 @@ const events = [
     regFee: "₹199 / solo",
     color: "#1a0a00",
     accentColor: "#f97316",
-    img: "/images/events/anukriti.jpg", // placeholder — swap for /images/anukriti.jpg
+    img: "/images/events/anukriti.webp", // placeholder — swap for /images/anukriti.webp
     description:
       "Solo, duet, and group categories across eastern, western, and mixed styles. Express your artistry on the biggest stage.",
     highlights: [
@@ -194,7 +194,7 @@ const events = [
     regFee: "₹999 / team",
     color: "#0a0a1a",
     accentColor: "#ec4899",
-    img: "/images/events/aakriti.jpg", // placeholder — swap for /images/aakriti.jpg
+    img: "/images/events/aakriti.webp", // placeholder — swap for /images/aakriti.webp
     description:
       "An inter-college fashion show competition. Bring creativity, style, and storytelling to the runway.",
     highlights: ["15+2 min per team", "Max 20 members", "Open to all colleges"],
@@ -209,7 +209,7 @@ const events = [
     regFee: "₹149 / individual",
     color: "#001a0a",
     accentColor: "#10b981",
-    img: "/images/events/surakriti.jpg", // placeholder — swap for /images/surakriti.jpg
+    img: "/images/events/surakriti.webp", // placeholder — swap for /images/surakriti.webp
     description:
       "An inter-college solo singing competition open to any collegiate singing enthusiast. Mics provided, bring your instruments.",
     highlights: [
