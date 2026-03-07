@@ -8,48 +8,80 @@ const scheduleData = {
     events: [
       {
         id: "e1",
-        time: "04:00",
+        time: "02:00",
         ampm: "PM",
-        duration: 1, // hours
+        duration: 2,
         title: "INAUGURATION",
         category: "CEREMONY",
         color: "#c9a94e",
+        description:
+          "The grand opening ceremony to kick off Jagriti '26 with inspiring speeches and lighting of the lamp.",
       },
       {
         id: "e2",
-        time: "05:00",
+        time: "04:00",
         ampm: "PM",
-        duration: 1.5,
-        title: "AAKRITI (FASHION)",
+        duration: 1,
+        title: "GCECT TALENTS",
         category: "CULTURAL",
         color: "#ec4899",
+        description:
+          "A brilliant showcase of the diverse talents possessed by the students of our very own college.",
       },
       {
         id: "e3",
-        time: "06:30",
+        time: "05:00",
         ampm: "PM",
-        duration: 1.5,
-        title: "SURAKRITI (SINGING)",
-        category: "CULTURAL",
+        duration: 0.5,
+        title: "ALUMNI MEET & GREET",
+        category: "CEREMONY",
         color: "#10b981",
+        description:
+          "A special gathering to reconnect, reminisce, and network with our esteemed alumni.",
       },
       {
         id: "e4",
-        time: "08:00",
+        time: "05:30",
         ampm: "PM",
-        duration: 1.5,
-        title: "THE FOLK DIARYZ",
-        category: "PERFORMANCE",
+        duration: 1,
+        title: "SURAKRITI (SINGING)",
+        category: "CULTURAL",
         color: "#e8845a",
+        description:
+          "Our flagship singing competition where sensational voices battle it out for the top spot.",
       },
       {
         id: "e5",
-        time: "09:30",
+        time: "06:45",
+        ampm: "PM",
+        duration: 1,
+        title: "AAKRITI (FASHION)",
+        category: "CULTURAL",
+        color: "#a855f7",
+        description:
+          "A spectacular fashion show displaying cutting-edge creativity, style, and elegance.",
+      },
+      {
+        id: "e6",
+        time: "07:30",
         ampm: "PM",
         duration: 1.5,
-        title: "BROKEN MELODY",
+        title: "BROKEN MELODIES",
         category: "PERFORMANCE",
         color: "#dc2626",
+        description:
+          "An electrifying musical performance that promises to set the evening mood on fire.",
+      },
+      {
+        id: "e7",
+        time: "09:00",
+        ampm: "PM",
+        duration: 2,
+        title: "FOLK DIARYZ",
+        category: "PERFORMANCE",
+        color: "#3b82f6",
+        description:
+          "A mesmerizing and soul-stirring folk music performance to conclude the first day.",
       },
     ],
   },
@@ -59,40 +91,48 @@ const scheduleData = {
     date: "8TH MARCH",
     events: [
       {
-        id: "e6",
+        id: "e8",
         time: "04:00",
         ampm: "PM",
         duration: 1.5,
         title: "ANUKRITI (DANCE)",
         category: "CULTURAL",
         color: "#f97316",
+        description:
+          "High-energy, synchronized, and breathtaking dance performances by top teams.",
       },
       {
-        id: "e7",
+        id: "e9",
         time: "05:30",
         ampm: "PM",
         duration: 2.5,
         title: "MUSICON (BANDS)",
         category: "CULTURAL", // Reusing category color for demo
         color: "#7c3aed",
+        description:
+          "An epic battle of the bands featuring hard-hitting performances and incredible music.",
       },
       {
-        id: "e8",
+        id: "e10",
         time: "08:00",
         ampm: "PM",
         duration: 1.5,
         title: "VALEDICTORY",
         category: "CEREMONY",
         color: "#c9a94e",
+        description:
+          "The closing ceremony featuring the prize distribution and official conclusion of the events.",
       },
       {
-        id: "e9",
+        id: "e11",
         time: "09:30",
         ampm: "PM",
         duration: 2,
         title: "TRAP STAGE",
         category: "PERFORMANCE",
         color: "#a855f7",
+        description:
+          "The ultimate final showdown with high-octane trap music and energetic DJ sets.",
       },
     ],
   },
@@ -268,9 +308,7 @@ const ScheduleSection = () => {
                     <p
                       className={`text-[0.8rem] text-text-dim/80 leading-relaxed font-['Space_Grotesk',sans-serif] md:text-${isLeft ? "right" : "left"}`}
                     >
-                      Join us at the main stage for an incredible showcase.
-                      Click here for more details about performers and stage
-                      information.
+                      {event.description}
                     </p>
                   </div>
                 </div>
