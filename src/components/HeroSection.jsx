@@ -28,80 +28,87 @@ const HeroSection = () => {
       { y: 40, opacity: 0 },
     );
 
-    // ── Entrance timeline ──
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    // Set the line to start from center (scaleX: 0)
+    gsap.set(".hero__line", { scaleX: 0 });
 
-    tl.to(".hero__college", {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      delay: 0.4,
-    })
-      .to(
-        ".hero__presents",
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-        },
-        "-=0.4",
-      )
-      .to(
-        ".hero__line",
-        {
-          opacity: 1,
-          y: 0,
-          scaleX: 1,
-          duration: 0.8,
-          ease: "power4.out",
-        },
-        "-=0.3",
-      )
-      .to(
-        ".hero__title-block",
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "power4.out",
-        },
-        "-=0.4",
-      )
-      .to(
-        ".hero__tagline",
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-        },
-        "-=0.3",
-      )
-      .to(
-        ".hero__meta",
-        {
-          opacity: 0.6,
-          y: 0,
-          duration: 0.6,
-        },
-        "-=0.2",
-      )
-      .to(
-        ".hero__cta-group",
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-        },
-        "-=0.2",
-      )
-      .to(
-        ".hero__scroll",
-        {
-          opacity: 0.6,
-          duration: 0.8,
-        },
-        "-=0.2",
-      );
+    // ── Entrance timeline ──
+    const playEntranceAnimation = () => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.to(".hero__college", {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+      })
+        .to(
+          ".hero__presents",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+          },
+          "-=0.4",
+        )
+        .to(
+          ".hero__line",
+          {
+            opacity: 1,
+            y: 0,
+            scaleX: 1,
+            duration: 0.8,
+            ease: "power4.out",
+          },
+          "-=0.3",
+        )
+        .to(
+          ".hero__title-block",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power4.out",
+          },
+          "-=0.4",
+        )
+        .to(
+          ".hero__tagline",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+          },
+          "-=0.3",
+        )
+        .to(
+          ".hero__meta",
+          {
+            opacity: 0.6,
+            y: 0,
+            duration: 0.6,
+          },
+          "-=0.2",
+        )
+        .to(
+          ".hero__cta-group",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+          },
+          "-=0.2",
+        )
+        .to(
+          ".hero__scroll",
+          {
+            opacity: 0.6,
+            duration: 0.8,
+          },
+          "-=0.2",
+        );
+    };
+
+    // Trigger the entrance ONLY when the preloader says it's done
+    window.addEventListener("preloaderComplete", playEntranceAnimation);
 
     // Set the line to start from center (scaleX: 0)
     gsap.set(".hero__line", { scaleX: 0 });
@@ -145,7 +152,10 @@ const HeroSection = () => {
       },
     });
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      window.removeEventListener("preloaderComplete", playEntranceAnimation);
+    };
   }, []);
 
   return (

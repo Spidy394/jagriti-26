@@ -23,14 +23,21 @@ const Navbar = () => {
       onLeaveBack: () => setScrolled(false),
     });
 
-    // Entrance: fade in the nav after hero text loads
-    gsap.fromTo(
-      nav,
-      { y: -20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, delay: 1.8, ease: "power3.out" },
-    );
+    // Entrance: fade in the nav after hero text appears
+    const playEntranceAnimation = () => {
+      gsap.fromTo(
+        nav,
+        { y: -20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, delay: 1.5, ease: "power3.out" },
+      );
+    };
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    window.addEventListener("preloaderComplete", playEntranceAnimation);
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      window.removeEventListener("preloaderComplete", playEntranceAnimation);
+    };
   }, []);
 
   const handleMenuToggle = () => setMenuOpen((prev) => !prev);
