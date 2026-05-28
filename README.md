@@ -2,7 +2,7 @@
 
 > Official website for **Jagriti '26** — the annual cultural festival of Government College of Engineering & Ceramic Technology, Kolkata.
 
-![Jagriti '26 Preview](./public/preview.jpeg)
+![Jagriti '26 Preview](./public/preview.png)
 
 ---
 
@@ -18,6 +18,10 @@ Jagriti is a celebration where creativity meets celebration. The website serves 
 - **Vite** — fast dev server & build tool
 - **Tailwind CSS v4** — utility-first styling with custom theme tokens
 - **GSAP + ScrollTrigger** — scroll-driven animations & parallax effects
+- **Zustand** — lightweight state management
+- **Axios** — promise-based HTTP client
+- **Google Drive API** — direct image fetching and gallery integration
+- **React Icons** — customizable icon library
 - **Bun** — package manager & script runner
 
 ---
@@ -27,16 +31,20 @@ Jagriti is a celebration where creativity meets celebration. The website serves 
 ```text
 src/
   components/
+    Preloader.jsx       # Initial loading screen with glitch/decode effect
     Navbar.jsx          # Fixed top nav with mobile hamburger overlay
     HeroSection.jsx     # Full-screen hero with GSAP entrance animation
     AboutSection.jsx    # About section with floating photo collage
     EventsSection.jsx   # Events — hover accordion (desktop) / tap accordion (mobile)
     BandLineupSection.jsx  # Band lineup with scroll-pinned stacking cards (desktop)
     ScheduleSection.jsx # Festival schedule with day selector
+    GallerySection.jsx  # Masonry photo gallery with lightbox and year selection
     SponsorsSection.jsx # Sponsor logo grid
     TeamSection.jsx     # Team member grid with animated cards
     ContactSection.jsx  # Contact form & info
     Footer.jsx          # Footer with GSAP parallax (desktop) / static (mobile)
+  data/                 # Static data files (events, schedule, team, etc.)
+  store/                # Zustand state management (e.g., gallery store)
 public/
   fonts/                # Custom fonts (Samarkan, etc.)
   images/               # Event, sponsor & team assets
