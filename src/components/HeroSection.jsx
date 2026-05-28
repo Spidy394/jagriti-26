@@ -223,12 +223,10 @@ const HeroSection = () => {
           </a>
           <a
             id="hero-register-btn"
-            href="https://forms.gle/bzqzBgswUN2khZ8L9"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#gallery"
             className="hero__btn hero__btn--outline font-['Space_Grotesk',sans-serif] text-[0.8rem] font-semibold tracking-[2px] uppercase py-[0.85rem] px-[2.2rem] w-full max-w-70 md:w-auto text-center cursor-pointer transition-transform duration-300 bg-transparent text-text border border-border hover:border-accent hover:text-accent hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-sm no-underline"
           >
-            Register Now
+            View Gallery
           </a>
         </div>
       </div>

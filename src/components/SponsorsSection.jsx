@@ -4,55 +4,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Categories of sponsors for variety
-const sponsorTiers = [
-  {
-    name: "Powered By",
-    sponsors: [
-      {
-        name: "S-Gen Consortium Infra Pvt. Ltd.",
-        img: "/images/sponcers/sen.webp",
-      },
-      {
-        name: "Raj Ihira Projects Pvt. Ltd.",
-        img: "/images/sponcers/raj.webp",
-      },
-    ],
-  },
-  {
-    name: "Co-Powered By",
-    sponsors: [
-      {
-        name: "Synapsis Medical Technologies Inc.",
-        img: "/images/sponcers/synapsismedical.webp",
-      },
-      // { name: "TCS", logo: "TCS" },
-      // { name: "Cognizant", logo: "CTS" },
-      // { name: "IBM", logo: "IBM" },
-    ],
-  },
-  // {
-  //   name: "Food Partners",
-  //   sponsors: [
-  //     { name: "Wow Momo", logo: "WM" },
-  //     { name: "Keventers", logo: "KV" },
-  //     { name: "Dominos", logo: "DP" },
-  //   ],
-  // },
-];
+import { sponsorTiers, tickerItems } from "../data/sponsorsData";
 
 const SponsorsSection = () => {
   const sectionRef = useRef(null);
 
-  // Actual partner names for the marquee ribbon
-  const tickerItems = [
-    "S-Gen Consortium Infra",
-    "Raj Ihira Projects",
-    "Synapsis Medical",
-    "S-Gen Consortium Infra",
-    "Raj Ihira Projects",
-    "Synapsis Medical",
-  ];
+
 
   useEffect(() => {
     const ctx = gsap.context(() => {

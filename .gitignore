@@ -25,3 +25,6 @@ dist-ssr
 
 .agents
 skills-lock.json
+
+# Environment variables
+.env

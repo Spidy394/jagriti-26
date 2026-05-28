@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /* ─── Mobile accordion card (tap-to-expand) ─── */
 const EventMobileCard = ({ event }) => {
@@ -145,80 +145,7 @@ const EventMobileCard = ({ event }) => {
   );
 };
 
-const events = [
-  {
-    id: "musicon",
-    name: "Musicon",
-    subtitle: "Battle of Bands",
-    category: "Music",
-    date: "8th March, 2026",
-    prize: "₹2,000",
-    regFee: "₹800 / team",
-    color: "#1a0a2e",
-    accentColor: "#7c3aed",
-    img: "/images/events/musicon.webp", // placeholder — swap for /images/musicon.webp
-    description:
-      "An inter-college band competition where music groups battle it out on stage. Bring your instruments and your passion.",
-    highlights: [
-      "10+5 min per team",
-      "Own instruments required",
-      "No programmed music",
-    ],
-  },
-  {
-    id: "anukriti",
-    name: "Anukriti",
-    subtitle: "Dance Competition",
-    category: "Dance",
-    date: "8th March, 2026",
-    prize: "₹6,000",
-    regFee: "₹199 / solo",
-    color: "#1a0a00",
-    accentColor: "#f97316",
-    img: "/images/events/anukriti.webp", // placeholder — swap for /images/anukriti.webp
-    description:
-      "Solo, duet, and group categories across eastern, western, and mixed styles. Express your artistry on the biggest stage.",
-    highlights: [
-      "Solo / Duet / Group",
-      "Eastern · Western · Mix",
-      "Changing rooms provided",
-    ],
-  },
-  {
-    id: "aakriti",
-    name: "Aakriti",
-    subtitle: "Fashion Show",
-    category: "Fashion",
-    date: "7th March, 2026",
-    prize: "₹2,000",
-    regFee: "₹999 / team",
-    color: "#0a0a1a",
-    accentColor: "#ec4899",
-    img: "/images/events/aakriti.webp", // placeholder — swap for /images/aakriti.webp
-    description:
-      "An inter-college fashion show competition. Bring creativity, style, and storytelling to the runway.",
-    highlights: ["15+2 min per team", "Max 20 members", "Open to all colleges"],
-  },
-  {
-    id: "surakriti",
-    name: "Surakriti",
-    subtitle: "Solo Singing",
-    category: "Singing",
-    date: "7th March, 2026",
-    prize: "₹1,000",
-    regFee: "₹149 / individual",
-    color: "#001a0a",
-    accentColor: "#10b981",
-    img: "/images/events/surakriti.webp", // placeholder — swap for /images/surakriti.webp
-    description:
-      "An inter-college solo singing competition open to any collegiate singing enthusiast. Mics provided, bring your instruments.",
-    highlights: [
-      "5+1 min per individual",
-      "Mics & plug-ins provided",
-      "Own instruments required",
-    ],
-  },
-];
+import { events } from "../data/eventsData";
 
 const COLLAPSED_WIDTH = "80px";
 const EXPANDED_WIDTH = "520px";
@@ -423,6 +350,22 @@ const EventCard = ({ event, isActive, onHover, onLeave, isAnyActive }) => {
 
 const EventsSection = () => {
   const [activeId, setActiveId] = useState(events[0].id);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Auto-expand logic
+  useEffect(() => {
+    if (isHovered) return; // Pause auto-play when user is interacting
+
+    const intervalId = setInterval(() => {
+      setActiveId((currentId) => {
+        const currentIndex = events.findIndex((e) => e.id === currentId);
+        const nextIndex = (currentIndex + 1) % events.length;
+        return events[nextIndex].id;
+      });
+    }, 2000); // Change card every 4 seconds
+
+    return () => clearInterval(intervalId);
+  }, [isHovered]);
 
   return (
     <section id="events" className="relative z-10 bg-bg w-full overflow-hidden">
@@ -447,18 +390,23 @@ const EventsSection = () => {
       {/* ── Desktop: horizontal hover accordion (hidden on mobile) ── */}
       <div
         className="hidden md:flex justify-center h-[82vh] min-h-140 max-h-215 w-full"
-        onMouseLeave={() => setActiveId(events[0].id)}
       >
-        {events.map((event) => (
-          <EventCard
-            key={event.id}
-            event={event}
-            isActive={activeId === event.id}
-            isAnyActive={!!activeId}
-            onHover={() => setActiveId(event.id)}
-            onLeave={() => {}}
-          />
-        ))}
+        <div 
+          className="flex h-full"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {events.map((event) => (
+            <EventCard
+              key={event.id}
+              event={event}
+              isActive={activeId === event.id}
+              isAnyActive={!!activeId}
+              onHover={() => setActiveId(event.id)}
+              onLeave={() => {}}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

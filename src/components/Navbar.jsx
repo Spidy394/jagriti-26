@@ -4,12 +4,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const links = ["Events", "Gallery", "Schedule", "Sponsors", "Contact"];
+
 const Navbar = () => {
   const navRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const links = ["Events", "Schedule", "Sponsors", "Contact"];
+
 
   useEffect(() => {
     const nav = navRef.current;

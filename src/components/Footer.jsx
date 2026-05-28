@@ -10,48 +10,49 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
+const exploreLinks = [
+  { label: "Events", href: "#events" },
+  { label: "Schedule", href: "#schedule" },
+  { label: "Gallery", href: "#gallery" },
+  { label: "Sponsors", href: "#sponsors" },
+  { label: "Contact", href: "#contact" },
+];
+
+const participateLinks = [
+  {
+    label: "Register Now",
+    href: "https://forms.gle/bzqzBgswUN2khZ8L9",
+    target: "_blank",
+    rel: "noopener noreferrer",
+  },
+  { label: "Become a Sponsor", href: "#sponsors" },
+  { label: "Volunteer", href: "#contact" },
+];
+
+const socials = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/jagriti_official._/",
+    icon: <FaInstagram size={20} />,
+  },
+  {
+    label: "YouTube",
+    href: "https://youtube.com",
+    icon: <FaYoutube size={20} />,
+  },
+  {
+    label: "Facebook",
+    href: "https://facebook.com",
+    icon: <FaFacebook size={20} />,
+  },
+  {
+    label: "Twitter/X",
+    href: "https://twitter.com",
+    icon: <FaXTwitter size={20} />,
+  },
+];
+
 const FooterContent = () => {
-  const exploreLinks = [
-    { label: "Events", href: "#events" },
-    { label: "Schedule", href: "#schedule" },
-    { label: "Gallery", href: "#gallery" },
-    { label: "Sponsors", href: "#sponsors" },
-    { label: "Contact", href: "#contact" },
-  ];
-
-  const participateLinks = [
-    {
-      label: "Register Now",
-      href: "https://forms.gle/bzqzBgswUN2khZ8L9",
-      target: "_blank",
-      rel: "noopener noreferrer",
-    },
-    { label: "Become a Sponsor", href: "#sponsors" },
-    { label: "Volunteer", href: "#contact" },
-  ];
-
-  const socials = [
-    {
-      label: "Instagram",
-      href: "https://www.instagram.com/jagriti_official._/",
-      icon: <FaInstagram size={20} />,
-    },
-    {
-      label: "YouTube",
-      href: "https://youtube.com",
-      icon: <FaYoutube size={20} />,
-    },
-    {
-      label: "Facebook",
-      href: "https://facebook.com",
-      icon: <FaFacebook size={20} />,
-    },
-    {
-      label: "Twitter/X",
-      href: "https://twitter.com",
-      icon: <FaXTwitter size={20} />,
-    },
-  ];
 
   return (
     <footer className="bg-bg border-t border-border">
@@ -202,11 +203,15 @@ const FooterContent = () => {
 const Footer = () => {
   const footerRef = useRef(null);
   const triggerRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(max-width: 767px)").matches;
+    }
+    return false;
+  });
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mq.matches);
     const handler = (e) => setIsMobile(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
