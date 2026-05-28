@@ -2,8 +2,8 @@ import { useState, useEffect, useRef, memo, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiArrowLeft, FiX } from "react-icons/fi";
-import axios from "axios";
 import { galleryData } from "../data/galleryData";
+import { useGalleryStore } from "../store/useGalleryStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,14 +64,18 @@ const GalleryImage = memo(({ photo, alt, onClick }) => {
 GalleryImage.displayName = "GalleryImage";
 
 const GallerySection = () => {
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const [selectedYear, setSelectedYear] = useState(null);
-  const [lightboxImg, setLightboxImg] = useState(null);
-  const [isLightboxLoaded, setIsLightboxLoaded] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(15);
-  const [isLoading, setIsLoading] = useState(false);
-  const [displayPhotos, setDisplayPhotos] = useState([]);
-  const categoryCache = useRef({});
+  const {
+    isGalleryOpen, setIsGalleryOpen,
+    selectedYear, setSelectedYear,
+    lightboxImg, setLightboxImg,
+    isLightboxLoaded, setIsLightboxLoaded,
+    visibleCount, incrementVisibleCount,
+    isLoading,
+    displayPhotos,
+    loadPhotos,
+    resetGallery
+  } = useGalleryStore();
+
   const containerRef = useRef(null);
   const observerTarget = useRef(null);
 
@@ -86,7 +90,7 @@ const GallerySection = () => {
           !isLoading &&
           visibleCount < displayPhotos.length
         ) {
-          setVisibleCount((prev) => prev + 20);
+          incrementVisibleCount(20);
         }
       },
       { rootMargin: "800px", threshold: 0.1 }, // Increased rootMargin to load images long before they are visible
@@ -102,7 +106,7 @@ const GallerySection = () => {
         observer.unobserve(currentTarget);
       }
     };
-  }, [isLoading, visibleCount, displayPhotos.length]);
+  }, [isLoading, visibleCount, displayPhotos.length, incrementVisibleCount]);
 
   // Hash change listener
   useEffect(() => {
@@ -110,16 +114,13 @@ const GallerySection = () => {
       if (window.location.hash === "#gallery") {
         setIsGalleryOpen(true);
       } else {
-        setIsGalleryOpen(false);
-        setSelectedYear(null);
-        setLightboxImg(null);
-        setVisibleCount(15);
+        resetGallery();
       }
     };
     handleHashChange();
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
+  }, [resetGallery, setIsGalleryOpen]);
 
   // Entrance animations for cards when modal opens
   useEffect(() => {
@@ -160,74 +161,16 @@ const GallerySection = () => {
   const handleImageClick = useCallback((photo) => {
     setLightboxImg(photo);
     setIsLightboxLoaded(false);
-  }, []);
+  }, [setLightboxImg, setIsLightboxLoaded]);
 
   const activeData = galleryData.find((d) => d.year === selectedYear);
 
   // Dynamically load photos
   useEffect(() => {
-    if (!activeData) return;
-    let isMounted = true;
-
-    const fetchFolderPhotos = async (folderId) => {
-      if (categoryCache.current[folderId])
-        return categoryCache.current[folderId];
-      if (!folderId || folderId.includes("YOUR_FOLDER_ID_HERE")) return [];
-
-      try {
-        const apiKey = import.meta.env.VITE_DRIVE_API;
-        if (!apiKey) {
-          console.error("VITE_DRIVE_API is missing!");
-          return [];
-        }
-        // Fetch files inside folder that are images
-        const res = await axios.get(
-          `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType+contains+'image/'&fields=files(id)&pageSize=1000&key=${apiKey}`,
-        );
-        const data = res.data;
-        if (data.files) {
-          const ids = data.files.map((f) => f.id);
-          categoryCache.current[folderId] = ids; // Cache the result
-          return ids;
-        }
-      } catch (e) {
-        console.error("Error fetching folder", folderId, e);
-      }
-      return [];
-    };
-
-    const loadPhotos = async () => {
-      setIsLoading(true);
-      let newPhotos = [];
-
-      // Fetch all categories in parallel
-      const allPromises = Object.values(activeData.categories).map(
-        async (val) => {
-          if (Array.isArray(val)) return val;
-          if (typeof val === "string") return await fetchFolderPhotos(val);
-          return [];
-        },
-      );
-      const results = await Promise.all(allPromises);
-      newPhotos = results.flat();
-      // Shuffle to mix all categories together
-      for (let i = newPhotos.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newPhotos[i], newPhotos[j]] = [newPhotos[j], newPhotos[i]];
-      }
-
-      if (isMounted) {
-        setDisplayPhotos(newPhotos);
-        setIsLoading(false);
-      }
-    };
-
-    loadPhotos();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [activeData]);
+    if (activeData) {
+      loadPhotos(activeData);
+    }
+  }, [activeData, loadPhotos]);
 
   // Slice for pagination
   const paginatedPhotos = displayPhotos.slice(0, visibleCount);
