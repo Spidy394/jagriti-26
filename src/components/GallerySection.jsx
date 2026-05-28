@@ -189,7 +189,7 @@ const GallerySection = () => {
   if (!isGalleryOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-100 bg-bg/95 backdrop-blur-xl overflow-y-auto flex flex-col justify-center animate-in fade-in duration-300">
+    <div className="fixed inset-0 z-100 bg-bg/95 backdrop-blur-xl overflow-y-auto flex flex-col animate-in fade-in duration-300">
       {/* Close button for cards modal */}
       {!selectedYear && (
         <button
@@ -204,7 +204,7 @@ const GallerySection = () => {
       {!selectedYear && (
         <div
           ref={containerRef}
-          className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 w-full py-20"
+          className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 w-full py-20 my-auto"
         >
           {/* Header */}
           <div className="text-center mb-16">
