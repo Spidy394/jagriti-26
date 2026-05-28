@@ -2,7 +2,7 @@ export const galleryData = [
   {
     year: "2026",
     title: "Future Echoes",
-    coverImg: "1B_ruXwcGTvgXnq7V07ubwRVXfKKWiLFq",
+    coverImg: "/images/cover26.jpg",
     videoUrl: null,
     categories: {
       "Inorgation_AlumniMeet": "1G3FerC5cy1cb2bV16Ru_vr5ERntRC7U-",
@@ -20,7 +20,7 @@ export const galleryData = [
   {
     year: "2025",
     title: "The Resurgence",
-    coverImg: "1PZnRAKCt2Agf3tnGv-uYnmuCfd5EnGRQ",
+    coverImg: "/images/cover25.jpg",
     videoUrl: "https://www.youtube.com/embed/placeholder2025",
     categories: {
       "Aakriti": "1hMXH_3YzUlWDx13mq7LFY3QVDGBFkgz4",

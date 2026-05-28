@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, memo, useCallback } from "react";
+import { useEffect, useRef, memo, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiArrowLeft, FiX } from "react-icons/fi";
@@ -11,13 +11,13 @@ gsap.registerPlugin(ScrollTrigger);
 const getImageUrl = (source, size = "w400") => {
   if (!source) return "";
   if (source.startsWith("/") || source.startsWith("http")) return source;
-  // If it's just an ID, use the thumbnail API
-  return `https://drive.google.com/thumbnail?id=${source}&sz=${size}`;
+  // Use lh3 endpoint which provides direct image access and avoids CORS/redirect issues
+  return `https://lh3.googleusercontent.com/d/${source}=${size}`;
 };
 
 const GalleryImage = memo(({ photo, alt, onClick }) => {
   const { imageStates, setImageLoaded, setImageSpan } = useGalleryStore();
-  
+
   const isLoaded = imageStates[photo]?.isLoaded || false;
   const span = imageStates[photo]?.span || 23;
 
@@ -54,7 +54,9 @@ const GalleryImage = memo(({ photo, alt, onClick }) => {
           decoding="async"
           onLoad={() => setImageLoaded(photo, true)}
           className={`w-full h-auto object-cover transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 ${
-            isLoaded ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-110 blur-md"
+            isLoaded
+              ? "opacity-100 scale-100 blur-0"
+              : "opacity-0 scale-110 blur-md"
           }`}
         />
         <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-colors duration-300" />
@@ -66,15 +68,20 @@ GalleryImage.displayName = "GalleryImage";
 
 const GallerySection = () => {
   const {
-    isGalleryOpen, setIsGalleryOpen,
-    selectedYear, setSelectedYear,
-    lightboxImg, setLightboxImg,
-    isLightboxLoaded, setIsLightboxLoaded,
-    visibleCount, incrementVisibleCount,
+    isGalleryOpen,
+    setIsGalleryOpen,
+    selectedYear,
+    setSelectedYear,
+    lightboxImg,
+    setLightboxImg,
+    isLightboxLoaded,
+    setIsLightboxLoaded,
+    visibleCount,
+    incrementVisibleCount,
     isLoading,
     displayPhotos,
     loadPhotos,
-    resetGallery
+    resetGallery,
   } = useGalleryStore();
 
   const containerRef = useRef(null);
@@ -159,10 +166,13 @@ const GallerySection = () => {
     window.location.hash = "";
   };
 
-  const handleImageClick = useCallback((photo) => {
-    setLightboxImg(photo);
-    setIsLightboxLoaded(false);
-  }, [setLightboxImg, setIsLightboxLoaded]);
+  const handleImageClick = useCallback(
+    (photo) => {
+      setLightboxImg(photo);
+      setIsLightboxLoaded(false);
+    },
+    [setLightboxImg, setIsLightboxLoaded],
+  );
 
   const activeData = galleryData.find((d) => d.year === selectedYear);
 
@@ -357,14 +367,14 @@ const GallerySection = () => {
           >
             <FiX className="text-4xl" />
           </button>
-          
+
           {/* Loading Spinner */}
           {!isLightboxLoaded && (
             <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
               <div className="w-10 h-10 border-2 border-accent border-t-transparent rounded-full animate-spin" />
             </div>
           )}
-          
+
           {/* Blurred Placeholder */}
           <img
             src={getImageUrl(lightboxImg, "w400")}
