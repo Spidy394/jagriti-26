@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, memo, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiArrowLeft, FiX } from "react-icons/fi";
@@ -7,73 +7,68 @@ import { galleryData } from "../data/galleryData";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
 // Helper to handle Google Drive IDs vs Local Paths
 const getImageUrl = (source, isThumb = true) => {
   if (!source) return "";
   if (source.startsWith("/") || source.startsWith("http")) return source;
   // If it's just an ID, use the thumbnail API
   return isThumb
-    ? `https://drive.google.com/thumbnail?id=${source}&sz=w800`
+    ? `https://drive.google.com/thumbnail?id=${source}&sz=w400`
     : `https://drive.google.com/thumbnail?id=${source}&sz=w2500`;
 };
 
-
-const GalleryImage = ({ photo, alt, onClick }) => {
+const GalleryImage = memo(({ photo, alt, onClick }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [span, setSpan] = useState(23); // 200px + 24px gap = 224 -> ceil(22.4) = 23
   const imgRef = useRef(null);
 
-  const calculateSpan = () => {
-    if (imgRef.current) {
-      const height = imgRef.current.getBoundingClientRect().height;
-      setSpan(Math.ceil((height + 24) / 10));
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener("resize", calculateSpan);
-    return () => window.removeEventListener("resize", calculateSpan);
+    if (!imgRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const height = entry.contentRect.height;
+        if (height > 0) {
+          setSpan(Math.ceil((height + 24) / 10));
+        }
+      }
+    });
+    observer.observe(imgRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div style={{ gridRowEnd: `span ${span}` }} className="w-full relative">
       <div
-        onClick={onClick}
-        className={`w-full break-inside-avoid rounded-sm overflow-hidden cursor-zoom-in group relative border border-white/5 hover:border-accent/40 transition-colors animate-in fade-in zoom-in-95 duration-500 bg-surface/50 ${
+        onClick={() => onClick(photo)}
+        className={`w-full break-inside-avoid rounded-sm overflow-hidden cursor-zoom-in group relative border border-white/5 hover:border-accent/40 transition-colors ${
           !isLoaded ? "min-h-[200px]" : ""
         }`}
       >
-        {/* Skeleton Pulse */}
-        {!isLoaded && (
-          <div className="absolute inset-0 bg-white/5 animate-pulse" />
-        )}
-        
         <img
           ref={imgRef}
           src={getImageUrl(photo, true)}
           alt={alt}
           referrerPolicy="no-referrer"
           loading="lazy"
-          onLoad={() => {
-            setIsLoaded(true);
-            calculateSpan();
-          }}
-          className={`w-full h-auto object-cover transition-all duration-700 ease-out group-hover:scale-105 ${
-            isLoaded ? "opacity-100" : "opacity-0"
+          decoding="async"
+          onLoad={() => setIsLoaded(true)}
+          className={`w-full h-auto object-cover transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 ${
+            isLoaded ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-110 blur-md"
           }`}
         />
         <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-colors duration-300" />
       </div>
     </div>
   );
-};
+});
+GalleryImage.displayName = "GalleryImage";
 
 const GallerySection = () => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [selectedYear, setSelectedYear] = useState(null);
   const [lightboxImg, setLightboxImg] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(30);
+  const [isLightboxLoaded, setIsLightboxLoaded] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(15);
   const [isLoading, setIsLoading] = useState(false);
   const [displayPhotos, setDisplayPhotos] = useState([]);
   const categoryCache = useRef({});
@@ -86,11 +81,15 @@ const GallerySection = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !isLoading && visibleCount < displayPhotos.length) {
-          setVisibleCount((prev) => prev + 30);
+        if (
+          entries[0].isIntersecting &&
+          !isLoading &&
+          visibleCount < displayPhotos.length
+        ) {
+          setVisibleCount((prev) => prev + 20);
         }
       },
-      { rootMargin: "800px", threshold: 0.1 } // Increased rootMargin to load images long before they are visible
+      { rootMargin: "800px", threshold: 0.1 }, // Increased rootMargin to load images long before they are visible
     );
 
     const currentTarget = observerTarget.current;
@@ -114,7 +113,7 @@ const GallerySection = () => {
         setIsGalleryOpen(false);
         setSelectedYear(null);
         setLightboxImg(null);
-        setVisibleCount(12);
+        setVisibleCount(15);
       }
     };
     handleHashChange();
@@ -155,8 +154,13 @@ const GallerySection = () => {
   }, [isGalleryOpen, selectedYear, lightboxImg]);
 
   const closeGallery = () => {
-    window.location.hash = ""; 
+    window.location.hash = "";
   };
+
+  const handleImageClick = useCallback((photo) => {
+    setLightboxImg(photo);
+    setIsLightboxLoaded(false);
+  }, []);
 
   const activeData = galleryData.find((d) => d.year === selectedYear);
 
@@ -166,7 +170,8 @@ const GallerySection = () => {
     let isMounted = true;
 
     const fetchFolderPhotos = async (folderId) => {
-      if (categoryCache.current[folderId]) return categoryCache.current[folderId];
+      if (categoryCache.current[folderId])
+        return categoryCache.current[folderId];
       if (!folderId || folderId.includes("YOUR_FOLDER_ID_HERE")) return [];
 
       try {
@@ -177,7 +182,7 @@ const GallerySection = () => {
         }
         // Fetch files inside folder that are images
         const res = await axios.get(
-          `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType+contains+'image/'&fields=files(id)&pageSize=1000&key=${apiKey}`
+          `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType+contains+'image/'&fields=files(id)&pageSize=1000&key=${apiKey}`,
         );
         const data = res.data;
         if (data.files) {
@@ -196,11 +201,13 @@ const GallerySection = () => {
       let newPhotos = [];
 
       // Fetch all categories in parallel
-      const allPromises = Object.values(activeData.categories).map(async (val) => {
-        if (Array.isArray(val)) return val;
-        if (typeof val === "string") return await fetchFolderPhotos(val);
-        return [];
-      });
+      const allPromises = Object.values(activeData.categories).map(
+        async (val) => {
+          if (Array.isArray(val)) return val;
+          if (typeof val === "string") return await fetchFolderPhotos(val);
+          return [];
+        },
+      );
       const results = await Promise.all(allPromises);
       newPhotos = results.flat();
       // Shuffle to mix all categories together
@@ -229,7 +236,6 @@ const GallerySection = () => {
 
   return (
     <div className="fixed inset-0 z-100 bg-bg/95 backdrop-blur-xl overflow-y-auto flex flex-col justify-center animate-in fade-in duration-300">
-      
       {/* Close button for cards modal */}
       {!selectedYear && (
         <button
@@ -242,7 +248,10 @@ const GallerySection = () => {
 
       {/* Cards View (Hidden if a year is selected) */}
       {!selectedYear && (
-        <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 w-full py-20">
+        <div
+          ref={containerRef}
+          className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 w-full py-20"
+        >
           {/* Header */}
           <div className="text-center mb-16">
             <p className="font-['Space_Grotesk',sans-serif] text-[0.7rem] font-semibold tracking-[5px] uppercase text-accent mb-4">
@@ -281,7 +290,7 @@ const GallerySection = () => {
                   <p className="font-['Space_Grotesk',sans-serif] text-sm tracking-[4px] uppercase text-text-dim group-hover:text-white transition-colors duration-300">
                     {data.title}
                   </p>
-                  
+
                   {/* Decorative Elements */}
                   <div className="absolute top-8 left-8 w-2 h-2 rounded-full bg-accent/40 group-hover:bg-accent transition-colors duration-300" />
                   <div className="absolute top-8 right-8 w-2 h-2 rounded-full bg-accent/40 group-hover:bg-accent transition-colors duration-300" />
@@ -345,19 +354,20 @@ const GallerySection = () => {
 
             {/* Photo Grid Section */}
             <div className="w-full flex flex-col items-center gap-8">
-              
               {/* Custom Masonry Grid with smooth fade transition */}
-              <div className={`w-full transition-opacity duration-500 ease-in-out ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-                <div 
-                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 sm:gap-x-6 w-full items-start"
-                  style={{ gridAutoRows: '10px' }}
+              <div
+                className={`w-full transition-opacity duration-500 ease-in-out ${isLoading ? "opacity-0" : "opacity-100"}`}
+              >
+                <div
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 w-full items-start"
+                  style={{ gridAutoRows: "10px" }}
                 >
                   {paginatedPhotos.map((photo, index) => (
                     <GalleryImage
                       key={`${photo}-${index}`}
                       photo={photo}
                       alt={`Moment ${index + 1}`}
-                      onClick={() => setLightboxImg(photo)}
+                      onClick={handleImageClick}
                     />
                   ))}
                 </div>
@@ -382,7 +392,10 @@ const GallerySection = () => {
 
               {/* Infinite Scroll Sentinel */}
               {!isLoading && visibleCount < displayPhotos.length && (
-                <div ref={observerTarget} className="w-full py-10 flex items-center justify-center">
+                <div
+                  ref={observerTarget}
+                  className="w-full py-10 flex items-center justify-center"
+                >
                   <div className="w-6 h-6 border-2 border-accent border-t-transparent rounded-full animate-spin opacity-50" />
                 </div>
               )}
@@ -393,18 +406,32 @@ const GallerySection = () => {
 
       {/* Lightbox Modal */}
       {lightboxImg && (
-        <div className="fixed inset-0 z-200 bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-200 bg-black/95 flex items-center justify-center p-4 backdrop-blur-md animate-in fade-in duration-200">
           <button
             onClick={() => setLightboxImg(null)}
-            className="absolute top-6 right-6 md:top-10 md:right-10 text-white/50 hover:text-white transition-colors p-2"
+            className="absolute top-6 right-6 md:top-10 md:right-10 text-white/50 hover:text-white transition-colors p-2 z-50"
           >
             <FiX className="text-4xl" />
           </button>
+          
+          {/* Blurred Placeholder */}
+          <img
+            src={getImageUrl(lightboxImg, true)}
+            alt=""
+            referrerPolicy="no-referrer"
+            className={`absolute max-w-full max-h-[90vh] object-contain select-none blur-xl scale-105 transition-opacity duration-500 ${
+              isLightboxLoaded ? "opacity-0" : "opacity-50"
+            }`}
+          />
+
           <img
             src={getImageUrl(lightboxImg, false)} // Use high-res for lightbox
             alt="Expanded moment"
             referrerPolicy="no-referrer"
-            className="max-w-full max-h-[90vh] object-contain select-none animate-in zoom-in-95 duration-300"
+            onLoad={() => setIsLightboxLoaded(true)}
+            className={`relative max-w-full max-h-[90vh] object-contain select-none animate-in zoom-in-95 duration-500 transition-opacity ${
+              isLightboxLoaded ? "opacity-100" : "opacity-0"
+            }`}
           />
         </div>
       )}
