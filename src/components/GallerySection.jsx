@@ -8,18 +8,19 @@ import { useGalleryStore } from "../store/useGalleryStore";
 gsap.registerPlugin(ScrollTrigger);
 
 // Helper to handle Google Drive IDs vs Local Paths
-const getImageUrl = (source, isThumb = true) => {
+const getImageUrl = (source, size = "w400") => {
   if (!source) return "";
   if (source.startsWith("/") || source.startsWith("http")) return source;
   // If it's just an ID, use the thumbnail API
-  return isThumb
-    ? `https://drive.google.com/thumbnail?id=${source}&sz=w400`
-    : `https://drive.google.com/thumbnail?id=${source}&sz=w2500`;
+  return `https://drive.google.com/thumbnail?id=${source}&sz=${size}`;
 };
 
 const GalleryImage = memo(({ photo, alt, onClick }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [span, setSpan] = useState(23); // 200px + 24px gap = 224 -> ceil(22.4) = 23
+  const { imageStates, setImageLoaded, setImageSpan } = useGalleryStore();
+  
+  const isLoaded = imageStates[photo]?.isLoaded || false;
+  const span = imageStates[photo]?.span || 23;
+
   const imgRef = useRef(null);
 
   useEffect(() => {
@@ -28,13 +29,13 @@ const GalleryImage = memo(({ photo, alt, onClick }) => {
       for (let entry of entries) {
         const height = entry.contentRect.height;
         if (height > 0) {
-          setSpan(Math.ceil((height + 24) / 10));
+          setImageSpan(photo, Math.ceil((height + 24) / 10));
         }
       }
     });
     observer.observe(imgRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [photo, setImageSpan]);
 
   return (
     <div style={{ gridRowEnd: `span ${span}` }} className="w-full relative">
@@ -46,12 +47,12 @@ const GalleryImage = memo(({ photo, alt, onClick }) => {
       >
         <img
           ref={imgRef}
-          src={getImageUrl(photo, true)}
+          src={getImageUrl(photo, "w400")}
           alt={alt}
           referrerPolicy="no-referrer"
           loading="lazy"
           decoding="async"
-          onLoad={() => setIsLoaded(true)}
+          onLoad={() => setImageLoaded(photo, true)}
           className={`w-full h-auto object-cover transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 ${
             isLoaded ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-110 blur-md"
           }`}
@@ -217,7 +218,7 @@ const GallerySection = () => {
                 {/* Background Image with Overlay */}
                 <div className="absolute inset-0 z-0">
                   <img
-                    src={getImageUrl(data.coverImg, true)}
+                    src={getImageUrl(data.coverImg, "w1000")}
                     alt={`Gallery ${data.year}`}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 opacity-60 group-hover:opacity-80"
@@ -302,7 +303,7 @@ const GallerySection = () => {
                 className={`w-full transition-opacity duration-500 ease-in-out ${isLoading ? "opacity-0" : "opacity-100"}`}
               >
                 <div
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 w-full items-start"
+                  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-6 w-full items-start"
                   style={{ gridAutoRows: "10px" }}
                 >
                   {paginatedPhotos.map((photo, index) => (
@@ -357,9 +358,16 @@ const GallerySection = () => {
             <FiX className="text-4xl" />
           </button>
           
+          {/* Loading Spinner */}
+          {!isLightboxLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+              <div className="w-10 h-10 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+            </div>
+          )}
+          
           {/* Blurred Placeholder */}
           <img
-            src={getImageUrl(lightboxImg, true)}
+            src={getImageUrl(lightboxImg, "w400")}
             alt=""
             referrerPolicy="no-referrer"
             className={`absolute max-w-full max-h-[90vh] object-contain select-none blur-xl scale-105 transition-opacity duration-500 ${
@@ -368,7 +376,7 @@ const GallerySection = () => {
           />
 
           <img
-            src={getImageUrl(lightboxImg, false)} // Use high-res for lightbox
+            src={getImageUrl(lightboxImg, "w2500")} // Use high-res for lightbox
             alt="Expanded moment"
             referrerPolicy="no-referrer"
             onLoad={() => setIsLightboxLoaded(true)}

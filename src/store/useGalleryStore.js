@@ -10,6 +10,7 @@ export const useGalleryStore = create((set, get) => ({
   isLoading: false,
   displayPhotos: [],
   categoryCache: {},
+  imageStates: {},
 
   // Basic Setters
   setIsGalleryOpen: (isOpen) => set({ isGalleryOpen: isOpen }),
@@ -18,6 +19,18 @@ export const useGalleryStore = create((set, get) => ({
   setIsLightboxLoaded: (isLoaded) => set({ isLightboxLoaded: isLoaded }),
   setVisibleCount: (count) => set({ visibleCount: count }),
   incrementVisibleCount: (amount) => set((state) => ({ visibleCount: state.visibleCount + amount })),
+  setImageLoaded: (photo, isLoaded) => set((state) => ({
+    imageStates: {
+      ...state.imageStates,
+      [photo]: { ...state.imageStates[photo], isLoaded }
+    }
+  })),
+  setImageSpan: (photo, span) => set((state) => ({
+    imageStates: {
+      ...state.imageStates,
+      [photo]: { ...state.imageStates[photo], span }
+    }
+  })),
   
   // Reset when closing gallery
   resetGallery: () => set({
@@ -27,6 +40,7 @@ export const useGalleryStore = create((set, get) => ({
     isLightboxLoaded: false,
     visibleCount: 15,
     displayPhotos: [],
+    imageStates: {},
   }),
 
   // Async Thunk for loading photos
