@@ -80,13 +80,18 @@ export const useGalleryStore = create((set, get) => ({
     let newPhotos = [];
 
     // Fetch all categories in parallel
-    const allPromises = Object.values(activeData.categories).map(
-      async (val) => {
-        if (Array.isArray(val)) return val;
-        if (typeof val === "string") return await fetchFolderPhotos(val);
-        return [];
+    const processCategory = async (val) => {
+      if (Array.isArray(val)) return val;
+      if (typeof val === "string") return await fetchFolderPhotos(val);
+      if (typeof val === "object" && val !== null) {
+        const subPromises = Object.values(val).map(subVal => processCategory(subVal));
+        const subResults = await Promise.all(subPromises);
+        return subResults.flat();
       }
-    );
+      return [];
+    };
+
+    const allPromises = Object.values(activeData.categories).map(processCategory);
     
     const results = await Promise.all(allPromises);
     newPhotos = results.flat();

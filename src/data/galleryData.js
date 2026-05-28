@@ -11,7 +11,14 @@ export const galleryData = [
       "Aakriti": "1nkeFy4f8MVa6moxmn1psPscNpwUjeUvs",
       "BrokenMelodies": "1ANnkk-FSgaLsBXatn6br_mK5dl15A-i4",
       "FolkDiaryz": "101V2mHImYZcjUtItvO5hSJhOwvmgCnDj",
-      "Musicon": "1WDLbLgnGhJr5T23T-0krXEPPfyU2NmtY",
+      "Musicon": {
+        "BadDecision": "1CgDYSO-OS4pMN03DZ9S3S0L2GDy5jTH2",
+        "Middlemist": "19brUN8rahk-7zhruLXVMk14L-O49XuKO",
+        "MuzikCraze": "1142E9PjTDU78mtxkFWWn4ogPGeb32etg",
+        "PartheniumBagan": "1yt10WEV4PQxlO3wydpxFZof4m1LFvtyv",
+        "Porijayee": "1e3cHgVsf4Chgh1n9w2XRi1btSUg8CrcT",
+        "ProjectDhrishti": "16r03Byc9iglkKeWaFKkRFw7XFN4_dGNR",
+      },
       "Anukriti": "19uj8cXeufV6S6QREdt65-dBYHUbvOhpT",
       "Proloy": "1Kx4nsKkLMKP9ZUJzM29tx1_0nFa5MtGP",
       "TRAP": "1o2cHe0ddyt98Q3k2AgkE-DsaPbT0Z-E0"
@@ -21,7 +28,7 @@ export const galleryData = [
     year: "2025",
     title: "The Resurgence",
     coverImg: "1PZnRAKCt2Agf3tnGv-uYnmuCfd5EnGRQ",
-    videoUrl: "https://www.youtube.com/embed/placeholder2025",
+    videoUrl: null,
     categories: {
       "Aakriti": "1hMXH_3YzUlWDx13mq7LFY3QVDGBFkgz4",
       "Alumni Meet": "1KfPBEce0icNhHmO2MufymLFC6ZY-rcJ7",
