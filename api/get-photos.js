@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export default async function handler(req, res) {
   const { folderId } = req.query;
 
@@ -17,16 +19,8 @@ export default async function handler(req, res) {
   try {
     const googleDriveUrl = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType+contains+'image/'&fields=files(id)&pageSize=1000&key=${apiKey}`;
     
-    // Using native fetch for Vercel Serverless Function compatibility
-    const response = await fetch(googleDriveUrl);
-    
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Google Drive API Error:", errorText);
-      return res.status(response.status).json({ error: 'Failed to fetch from Google Drive API' });
-    }
-
-    const data = await response.json();
+    const response = await axios.get(googleDriveUrl);
+    const data = response.data;
     
     // Send cache headers (Vercel edge caching)
     // Cache for 1 hour on the CDN edge, and 5 minutes in the browser
@@ -34,7 +28,8 @@ export default async function handler(req, res) {
     
     return res.status(200).json(data);
   } catch (error) {
-    console.error("Error in get-photos handler:", error);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    console.error("Error in get-photos handler:", error.response?.data || error.message);
+    const status = error.response?.status || 500;
+    return res.status(status).json({ error: 'Failed to fetch from Google Drive API' });
   }
 }
