@@ -55,14 +55,8 @@ export const useGalleryStore = create((set, get) => ({
       if (!folderId || folderId.includes("YOUR_FOLDER_ID_HERE")) return [];
 
       try {
-        const apiKey = import.meta.env.VITE_DRIVE_API;
-        if (!apiKey) {
-          console.error("VITE_DRIVE_API is missing!");
-          return [];
-        }
-        const res = await axios.get(
-          `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType+contains+'image/'&fields=files(id)&pageSize=1000&key=${apiKey}`
-        );
+        // Now calling our secure Vercel serverless function
+        const res = await axios.get(`/api/get-photos?folderId=${folderId}`);
         
         if (res.data && res.data.files) {
           const ids = res.data.files.map((f) => f.id);
@@ -91,9 +85,16 @@ export const useGalleryStore = create((set, get) => ({
       return [];
     };
 
-    const allPromises = Object.values(activeData.categories).map(processCategory);
+    const categories = Object.values(activeData.categories);
+    const results = [];
     
-    const results = await Promise.all(allPromises);
+    // Process categories in chunks of 3 to prevent API rate limit issues
+    for (let i = 0; i < categories.length; i += 3) {
+      const chunk = categories.slice(i, i + 3);
+      const chunkResults = await Promise.all(chunk.map(processCategory));
+      results.push(...chunkResults);
+    }
+    
     newPhotos = results.flat();
     
     // Shuffle to mix all categories together
