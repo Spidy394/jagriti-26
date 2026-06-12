@@ -5,19 +5,60 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO -->
+    <!-- SEO Core -->
     <title>Jagriti'26 — Cultural Fest | GCECT</title>
     <meta
       name="description"
       content="Jagriti 2026 — The annual cultural fest of Government College of Engineering and Ceramic Technology. 7th & 8th March 2026. Music, dance, art, and celebration."
     />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="canonical" href="https://jagriti26.vercel.app/" />
+
+    <!-- Open Graph / Social -->
     <meta property="og:title" content="Jagriti'26 — Cultural Fest | GCECT" />
     <meta
       property="og:description"
       content="Experience the magic of Jagriti 2026. Two days of music, dance, art, and unbounded creativity."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jagriti26.vercel.app/" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Jagriti'26 — Cultural Fest" />
+    <meta name="twitter:description" content="Experience the magic of Jagriti 2026. Two days of music, dance, art, and unbounded creativity." />
+
+    <!-- Structured Data (JSON-LD) for Event -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Jagriti 2026",
+      "startDate": "2026-03-07T09:00:00+05:30",
+      "endDate": "2026-03-08T23:59:00+05:30",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": "Government College of Engineering and Ceramic Technology",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "73, Abinash Chandra Banerjee Lane",
+          "addressLocality": "Kolkata",
+          "postalCode": "700010",
+          "addressRegion": "West Bengal",
+          "addressCountry": "IN"
+        }
+      },
+      "image": [
+        "https://jagriti26.vercel.app/favicon.svg"
+      ],
+      "description": "The annual cultural fest of Government College of Engineering and Ceramic Technology. Music, dance, art, and celebration.",
+      "organizer": {
+        "@type": "Organization",
+        "name": "GCECT Students Union",
+        "url": "https://gcect.ac.in"
+      }
+    }
+    </script>
 
     <!-- Preload critical assets -->
     <link rel="preload" as="video" href="/hero-video.mp4" type="video/mp4" fetchpriority="high" />
